@@ -1,0 +1,50 @@
+// Configuration
+@import "node_modules/bootstrap/scss/utilities";
+
+// Layout & components
+@import "node_modules/bootstrap/scss/root";
+@import "node_modules/bootstrap/scss/reboot";
+@import "node_modules/bootstrap/scss/type";
+@import "node_modules/bootstrap/scss/images";
+@import "node_modules/bootstrap/scss/containers";
+@import "node_modules/bootstrap/scss/grid";
+// @import "node_modules/bootstrap/scss/tables";
+@import "node_modules/bootstrap/scss/forms";
+// @import "~bootstrap/scss/forms/labels";
+// @import "~bootstrap/scss/forms/form-text";
+// @import "~bootstrap/scss/forms/form-control";
+// @import "~bootstrap/scss/forms/form-select";
+// @import "~bootstrap/scss/forms/form-check";
+// @import "~bootstrap/scss/forms/form-range";
+// @import "~bootstrap/scss/forms/floating-labels";
+// @import "~bootstrap/scss/forms/input-group";
+// @import "~bootstrap/scss/forms/validation";
+
+@import "node_modules/bootstrap/scss/buttons";
+// @import "~bootstrap/scss/transitions";
+// @import "~bootstrap/scss/dropdown";
+// @import "~bootstrap/scss/button-group";
+// @import "~bootstrap/scss/nav";
+// @import "~bootstrap/scss/navbar";
+// @import "~bootstrap/scss/card";
+// @import "~bootstrap/scss/accordion";
+// @import "~bootstrap/scss/breadcrumb";
+// @import "~bootstrap/scss/pagination";
+// @import "~bootstrap/scss/badge";
+// @import "~bootstrap/scss/alert";
+// @import "~bootstrap/scss/progress";
+// @import "~bootstrap/scss/list-group";
+@import "node_modules/bootstrap/scss/close";
+// @import "~bootstrap/scss/toasts";
+@import "node_modules/bootstrap/scss/modal";
+// @import "~bootstrap/scss/tooltip";
+// @import "~bootstrap/scss/popover";
+// @import "~bootstrap/scss/carousel";
+@import "node_modules/bootstrap/scss/spinners";
+// @import "~bootstrap/scss/offcanvas";
+
+// Helpers
+@import "node_modules/bootstrap/scss/helpers";
+
+// Utilities
+@import "node_modules/bootstrap/scss/utilities/api";

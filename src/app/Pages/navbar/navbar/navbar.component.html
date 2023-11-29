@@ -1,0 +1,25 @@
+<nav>
+<div class="row w-100">
+  <div class="col-lg-8">
+    <a href="javascript:void(0)" class="text-white d-flex justify-content-center align-items-center p-sm">
+      <img src="../../../../assets/icons/sizee.png" alt="png img" id="uncolorfulltext">
+      <img src="../../../../assets/icons/size.png" alt="png img" id="colorfulltext" class="d-none">
+       Change Font</a>
+    <a href="javascript:void(0)" class="text-white d-flex justify-content-center align-items-center p-sm">
+      <img src = "../../../../assets/icons/color gray.png" alt="png img"  [(colorPicker)]="color" (colorPickerChange)="getcolor($event)" id="uncolorfull" class="me-1">
+      <img src = "../../../../assets/icons/colour.png" alt="png img" class="d-none" [(colorPicker)]="color" id="colorfull">
+       Change Color
+    </a>
+    <a href="javascript:void(0)" class="text-white d-flex justify-content-center align-items-center p-sm">
+      <img src="../../../../assets/icons/reordere.png" alt="png img" id="uncolorfullreorder">
+      <img src="../../../../assets/icons/reorder.png" alt="png img" id="colorfullreorder" class="d-none">
+       Arrange Item</a>
+    <a href="javascript:void(0)" class="text-white d-flex justify-content-center align-items-center p-sm"> <img src="../../../../assets/icons/iconizer-Edit.png" alt="png img"> Edit</a>
+  </div>
+  <div class="col-lg-4">
+    <a href="javascript:void(0)" class="text-white d-flex justify-content-center align-items-center p-sm"><img src="../../../../assets/images/person.jpg" alt="user png img" class="user"> Welcome: Mr.Mohamed</a>
+  </div>
+</div>
+
+
+</nav>

@@ -1,0 +1,336 @@
+<main id="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-2 col-md-12 col-sm-12">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="col-lg-10 col-md-12 col-sm-12 p-0">
+        <app-navbar></app-navbar>
+        <div class="row p-sm m-0">
+          <div class="col-lg-4">
+            <div class="input-group position-relative">
+              <div class="icon position-absolute end-0">
+                <img src="../../../../assets/icons/loupe.png" alt="png img icon">
+              </div>
+              <input
+              type="text"
+              class="form-control rounded-3 text-white"
+              aria-label="Default"
+              aria-describedby="inputGroup-sizing-default"
+              placeholder="Search"
+              [(ngModel)]= "searchText"
+              (keyup)="filter($any($event).target.value)">
+            </div>
+          </div>
+          <div class="col-lg-4 d-flex justify-content-around align-items-center buttons">
+            <button type="button" class="btn Search rounded-4 text-white ms-sm">Search</button>
+            <button type="button" class="btn Cancel rounded-4 text-white ms-sm" (click)="cancelSearch()">Cancel Search</button>
+          </div>
+          <div class="col-lg-12 d-flex justify-content-start align-items-center mt-md">
+            <button type="button" class="btn Add rounded-4 text-white ms-sm"(click)="openCreateForm()">Add New City <img src="../../../../assets/icons/add.png" alt="add img png"></button>
+          </div>
+          <div class="col-lg-12 mt-md p-sm">
+            <ngx-datatable
+            [scrollbarH]="true"
+            [scrollbarV]="true"
+            class="material"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="70"
+            rowHeight="auto"
+            [rows]="rows"
+            [limit]="3">
+            <ngx-datatable-column name="id" prop="id" [width]="200"></ngx-datatable-column>
+            <ngx-datatable-column name="governorate_id" prop="governorate_id" [width]="200"></ngx-datatable-column>
+            <ngx-datatable-column name="name_ar" prop="name_ar" [width]="200"></ngx-datatable-column>
+            <ngx-datatable-column name="name_en" prop="name_en" [width]="200"></ngx-datatable-column>
+            <ngx-datatable-column name="active" prop="active" [width]="200">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <ng-container *ngIf="row.active == 1">
+                  <div class="checkbox-wrapper-7">
+                    <input class="tgl tgl-ios" checked disabled id="cb2-7" type="checkbox"/>
+                    <label class="tgl-btn" for="cb2-7"></label>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="row.active == 0">
+                  <div class="checkbox-wrapper-7">
+                    <input class="tgl tgl-ios" disabled id="cb2-7" type="checkbox"/>
+                    <label class="tgl-btn" for="cb2-7"></label>
+                  </div>
+                </ng-container>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="created_at" prop="created_at" [width]="300">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <ng-container>
+                  {{row.created_at | date:'EEEE, MMMM d, y, h:mm:ss a'}}
+                </ng-container>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="updated_at" prop="updated_at" [width]="300">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <ng-container>
+                  {{row.updated_at | date:'EEEE, MMMM d, y, h:mm:ss a'}}
+                </ng-container>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="deleted_at" prop="deleted_at" [width]="300">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <ng-container>
+                  {{row.deleted_at | date:'EEEE, MMMM d, y, h:mm:ss a'}}
+                </ng-container>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column
+            name="Actions"
+            [sortable]="false"
+            prop="id"
+            [width]="250"
+            [minWidth]="250"
+            [resizeable]="true">
+            <ng-template
+              let-row="row"
+              let-value="value"
+              let-rowIndex="rowIndex"
+              ngx-datatable-cell-template>
+              <img src="../../../../assets/icons/e.png" alt="img png"  style="width: 40px; cursor: pointer;" class="me-sm" (click)="CheckBox_open()">
+              <img src="../../../../assets/icons/editing.png" alt="img png"  style="width: 40px; cursor: pointer;" class="me-sm" (click)="UpdateCity(row)">
+              <img src="../../../../assets/icons/trash.png" alt="img png" style="width: 40px; cursor: pointer;" class="me-sm" (click)="DeleteCityId(row.id)">
+              <img src="../../../../assets/icons/traffic_signal.png" alt="img png" style="width: 40px; cursor: pointer;" class="me-sm" (click)="active(row.id , row.active)">
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<!-- Add New City -->
+<div class="modal fade show d-block" tabindex="-1" *ngIf="show_create" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background-color:#191919;">
+      <div class="d-flex justify-content-end align-items-center">
+        <i class="fa-solid fa-xmark fa-3x p-sm" (click)="close_create()" style="color: white; cursor: pointer;"></i>
+      </div>
+      <div class="modal-body">
+        <h2 class="fs-lg text-white text-center text-decoration mb-lg p-sm" style="background-color :#292929;">Add New City</h2>
+        <form class="text-white" [formGroup]="Create_Form" (ngSubmit)="CreateForm(Create_Form)">
+          <div class="d-flex justify-content-around align-items-center mb-md">
+            <div class="col-3">
+              <label for="name_ar">Name in Ar : </label>
+            </div>
+           <div class="col-9">
+            <div class="input-group">
+              <input
+                    type="text"
+                    class="form-control rounded-3"
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                    id="name_ar"
+                    placeholder="Name in Arabic"
+                    formControlName="name_ar"
+                    />
+            </div>
+           </div>
+          </div>
+          <div class="d-flex justify-content-around align-items-center mb-md">
+            <div class="col-3">
+              <label for="name_en">Name in En : </label>
+            </div>
+           <div class="col-9">
+            <div class="input-group">
+              <input
+                    type="text"
+                    class="form-control rounded-3"
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                    id="name_en"
+                    placeholder="Name in English"
+                    formControlName="name_en"
+                    />
+            </div>
+           </div>
+          </div>
+          <div class="d-flex justify-content-center align-items-center mt-sm" *ngIf="!loader_create">
+            <button type="submit" class="btn rounded-3 text-white" style="background-color: #2a2a2a; border: 2px solid #aaa5a5;" [disabled]="!Create_Form.valid">Add New City</button>
+          </div>
+        </form>
+        <div class="d-flex justify-content-center align-items-center" *ngIf="loader_create">
+          <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete City -->
+<div class="glass-effect position-absolute start-0 top-0 d-flex justify-content-center align-items-center" *ngIf="show_delete">
+  <div class="h-25 w-50 p-sm d-flex flex-column justify-content-center align-items-center" style="background-color: #661919;">
+    <p class="text-white fw-bold display-5 text-center">Are You Sure You Want Delete This City</p>
+    <div class="d-flex justify-content-around align-items-center w-75" *ngIf="!loader_delete">
+      <button class="btn rounded-3 text-white" style="border: 4px solid #ff0000; background-color: #792c2c;" type="button" (click)="deleteCity()">Delete</button>
+      <button class="btn rounded-3 text-white" style="border: 3px solid white; background-color: #792c2c;" (click)="show_delete=false">Cancel</button>
+    </div>
+    <div class="d-flex justify-content-center align-items-center" *ngIf="loader_delete">
+      <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- DiActivate || Activate -->
+<div class="glass-effect position-absolute start-0 top-0 d-flex justify-content-center align-items-center" *ngIf="show_activate">
+  <div class="h-25 w-50 p-sm d-flex flex-column justify-content-center align-items-center" [style.background-color] = "!toggle ? '#717171 ' : '#013c11'">
+    <p class="text-white fw-bold display-5 text-center">{{active_letter}}</p>
+    <div class="d-flex justify-content-around align-items-center w-75" *ngIf="!loader_activate">
+      <button class="btn rounded-3 text-white" [style.border] = "!toggle ? '4px solid #313131' : ' 4px solid #075913'" [style.background-color] = "!toggle ? '#717171 ' : '#075913'" (click)="toggleActivate()">{{active_button}}</button>
+      <button class="btn rounded-3 text-white" style="border: 3px solid white;" [style.background-color] = "!toggle ? '#717171 ' : '#013c11'" (click)="show_activate=false">Cancel</button>
+    </div>
+    <div class="d-flex justify-content-center align-items-center" *ngIf="loader_activate">
+      <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Options -->
+<div class="modal fade show d-block" tabindex="-1" *ngIf="show_option" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background-color:#191919;">
+      <div class="d-flex justify-content-end align-items-center">
+        <i class="fa-solid fa-xmark fa-3x p-sm" (click)="close_option()" style="color: white; cursor: pointer;"></i>
+      </div>
+      <div class="modal-body">
+        <h2 class="fs-lg text-white text-center text-decoration mb-lg p-sm" style="background-color :#292929;">Set partition validity</h2>
+        <div class="d-flex justify-content-around align-items-center mb-md">
+          <div class="col-5">
+            <p class="text-white">Laundry : </p>
+          </div>
+         <div class="col-7">
+          <ngx-checkbox
+          [iconClass]="'fas fa-check other-custom-icon'"
+          [isChecked]="Laundry"
+          [checkedClass]="'other-checkbox-checked'"
+          [nocheckedClass]="'checkbox-no-checked'"
+          [size]="40"
+          (isClicked)="CheckBox('Laundry')">
+        </ngx-checkbox>
+         </div>
+        </div>
+        <div class="d-flex justify-content-around align-items-center mb-md">
+          <div class="col-5">
+            <p class="text-white">Paints : </p>
+          </div>
+         <div class="col-7">
+          <ngx-checkbox
+          [iconClass]="'fas fa-check other-custom-icon'"
+          [isChecked]="Paints"
+          [checkedClass]="'other-checkbox-checked'"
+          [nocheckedClass]="'checkbox-no-checked'"
+          [size]="40"
+          (isClicked)="CheckBox('Paints')">
+        </ngx-checkbox>
+         </div>
+        </div>
+        <div class="d-flex justify-content-around align-items-center mb-md">
+          <div class="col-5">
+            <p class="text-white"> Shoe repair : </p>
+          </div>
+         <div class="col-7">
+          <ngx-checkbox
+          [iconClass]="'fas fa-check other-custom-icon'"
+          [isChecked]="Shoe_repair"
+          [checkedClass]="'other-checkbox-checked'"
+          [nocheckedClass]="'checkbox-no-checked'"
+          [size]="40"
+          (isClicked)="CheckBox('Shoe_repair')">
+        </ngx-checkbox>
+         </div>
+        </div>
+        <div class="d-flex justify-content-around align-items-center mb-md">
+          <div class="col-5">
+            <p class="text-white"> Deep cleaning : </p>
+          </div>
+         <div class="col-7">
+          <ngx-checkbox
+          [iconClass]="'fas fa-check other-custom-icon'"
+          [isChecked]="Deep_cleaning"
+          [checkedClass]="'other-checkbox-checked'"
+          [nocheckedClass]="'checkbox-no-checked'"
+          [size]="40"
+          (isClicked)="CheckBox('Deep_cleaning')">
+        </ngx-checkbox>
+         </div>
+        </div>
+        <div class="d-flex justify-content-around align-items-center mb-md">
+          <div class="col-7">
+            <p class="text-white"> Spraying pesticides for homes : </p>
+          </div>
+         <div class="col-5">
+          <ngx-checkbox
+          [iconClass]="'fas fa-check other-custom-icon'"
+          [isChecked]="Spraying_pesticides_for_homes"
+          [checkedClass]="'other-checkbox-checked'"
+          [nocheckedClass]="'checkbox-no-checked'"
+          [size]="40"
+          (isClicked)="CheckBox('Spraying_pesticides_for_homes')">
+        </ngx-checkbox>
+         </div>
+        </div>
+        <div class="d-flex justify-content-around align-items-center mb-md">
+          <div class="col-7">
+            <p class="text-white"> Spraying pesticides for gardens : </p>
+          </div>
+         <div class="col-5">
+          <ngx-checkbox
+          [iconClass]="'fas fa-check other-custom-icon'"
+          [isChecked]="Spraying_pesticides_for_gardens"
+          [checkedClass]="'other-checkbox-checked'"
+          [nocheckedClass]="'checkbox-no-checked'"
+          [size]="40"
+          (isClicked)="CheckBox('   Spraying_pesticides_for_gardens')">
+        </ngx-checkbox>
+         </div>
+        </div>
+        <div class="d-flex justify-content-around align-items-center mb-md">
+          <div class="col-7">
+            <p class="text-white"> House foundation cleaning : </p>
+          </div>
+         <div class="col-5">
+          <ngx-checkbox
+          [iconClass]="'fas fa-check other-custom-icon'"
+          [isChecked]="House_foundation_cleaning"
+          [checkedClass]="'other-checkbox-checked'"
+          [nocheckedClass]="'checkbox-no-checked'"
+          [size]="40"
+          (isClicked)="CheckBox('House_foundation_cleaning')">
+        </ngx-checkbox>
+         </div>
+        </div>
+        <div class="d-flex justify-content-around align-items-center mb-md">
+          <div class="col-7">
+            <p class="text-white"> Sewing and mending clothes : </p>
+          </div>
+         <div class="col-5">
+          <ngx-checkbox
+          [iconClass]="'fas fa-check other-custom-icon'"
+          [isChecked]="Sewing_and_mending_clothes"
+          [checkedClass]="'other-checkbox-checked'"
+          [nocheckedClass]="'checkbox-no-checked'"
+          [size]="40"
+          (isClicked)="CheckBox('Sewing_and_mending_clothes')">
+        </ngx-checkbox>
+         </div>
+        </div>
+        <div class="d-flex justify-content-center align-items-center mt-sm">
+          <button type="submit" class="btn rounded-3 text-white" style="background-color: #2a2a2a; border: 2px solid #aaa5a5;" (click)="close_option()">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,82 @@
+$shadow : #fb0911;
+$bg-input : #040404;
+
+main
+{
+  &
+  {
+    min-height: 100vh;
+    height: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h1
+    {
+      font-family: "Segoe UI", Arial, sans-serif;
+      text-shadow: $shadow 3px 3px 5px;
+    }
+    p
+    {
+      text-shadow: $shadow 3px 3px 5px;
+    }
+    background:
+    {
+      image : url("../../../../assets/images/bg-error.png");
+      position: center center;
+      size : cover;
+    };
+  }
+
+  .container
+  {
+    div[class^="col-"]
+    {
+      img
+      {
+        width: 25%;
+      }
+    }
+    button
+    {
+      background:
+      {
+        color: $bg-input;
+      };
+      border: 1px solid $shadow;
+      box-shadow: $shadow 3px 3px 5px 0px inset;
+      width: 25%;
+    }
+  }
+}
+
+
+
+
+
+@media only screen and (max-width : 992px)
+{
+  main
+  {
+    .container
+    {
+      div[class^="col-"]
+      {
+        img
+        {
+          width: 50%;
+        }
+        button
+        {
+          width: 50%;
+        }
+
+      }
+    }
+  }
+}
+
+
+
+

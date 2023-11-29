@@ -1,0 +1,26 @@
+$bg-input : #040404;
+$shadow-input : #01a2a3;
+$border-input : #01a2a3;
+$border : #09fbc1;
+$border-table : #04765b;
+
+::ng-deep .datatable-body-cell , ::ng-deep .datatable-header-cell , ::ng-deep .datatable-footer
+{
+  padding: 10px !important;
+  border: 2px solid $border-table;
+  background-color: $bg-input !important;
+  color : white !important;
+}
+::ng-deep .ngx-datatable
+{
+  height: 300px;
+}
+
+
+@media only screen and (max-width: 992px)
+{
+  ::ng-deep .ngx-datatable
+  {
+    height: 500px;
+  }
+}

@@ -1,0 +1,193 @@
+<main id="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-2 col-md-12 col-sm-12 p-0">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="col-lg-10">
+        <app-navbar></app-navbar>
+        <div class="row p-sm m-0">
+          <div class="col-lg-4 d-flex justify-content-center align-items-center">
+            <div class="input-group position-relative">
+              <div class="icon position-absolute end-0">
+                <img src="../../../../assets/icons/loupe.png" alt="png img icon">
+              </div>
+              <input
+              type="text"
+              class="form-control rounded-3 text-white"
+              aria-label="Default"
+              aria-describedby="inputGroup-sizing-default"
+              placeholder="Name"
+              (keyup)="filter($any($event).target.value)">
+            </div>
+          </div>
+          <div class="col-lg-4 d-flex justify-content-around align-items-center buttons">
+            <button type="button" class="btn Search rounded-4 text-white ms-sm">Search</button>
+            <button type="button" class="btn Cancel rounded-4 text-white ms-sm">Cancel Search</button>
+          </div>
+          <div class="col-lg-4 d-flex justify-content-end align-items-center">
+            <img src="../../../../assets/images/{{country}}" alt="img png flag">
+          </div>
+          <div class="col-lg-12 d-flex justify-content-start align-items-center mt-md">
+            <button type="button" class="btn Add rounded-4 text-white ms-sm" (click)="show=true">Add New Project manager <img src="../../../../assets/icons/add.png" alt="add img png"></button>
+          </div>
+          <div class="col-lg-12 mt-md p-sm">
+            <ngx-datatable
+            [scrollbarH]="true"
+            [scrollbarV]="true"
+            class="material"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="70"
+            rowHeight="auto"
+            [rows]="rows"
+            [limit]="3">
+            <ngx-datatable-column class="bg-danger" name="Client Request Order" prop="Client Request Order" [width]="200"></ngx-datatable-column>
+            <ngx-datatable-column name="Laundry Confirmed Order" prop="Laundry Confirmed Order" [width]="200"></ngx-datatable-column>
+            <ngx-datatable-column name="Sent delivery To Client" prop="Sent delivery To Client" [width]="200"></ngx-datatable-column>
+            <ngx-datatable-column name="delivery Man Arrived" prop="delivery Man Arrived" [width]="200"></ngx-datatable-column>
+            <ngx-datatable-column name="Laundry Working on order" prop="Laundry Working on order" [width]="200"></ngx-datatable-column>
+            <ngx-datatable-column name="delivery send order" prop="delivery send order" [width]="200"></ngx-datatable-column>
+            <ngx-datatable-column name="Order delieverd" prop="Order delieverd" [width]="200"></ngx-datatable-column>
+            <ngx-datatable-column
+            name="Actions"
+            [sortable]="false"
+            prop="id"
+            [width]="250"
+            [minWidth]="250"
+            [resizeable]="true">
+            <ng-template
+              let-row="row"
+              let-value="value"
+              let-rowIndex="rowIndex"
+              ngx-datatable-cell-template>
+              <img src="../../../../assets/icons/trash_2.png" alt="img png" style="cursor: pointer;" (click)="show_delete=true">
+              <img src="../../../../assets/icons/right.png" alt="img png" style="cursor: pointer;" (click)="show_right=true">
+              <img src="../../../../assets/icons/compose.png" alt="img png" style="cursor: pointer;">
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<div class="modal fade show d-block" tabindex="-1" *ngIf="show" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background-color:#191919; width: 500px;">
+      <div class="d-flex justify-content-end align-items-center">
+        <i class="fa-solid fa-xmark fa-3x p-sm" (click)="close()" style="color: white; cursor: pointer;"></i>
+      </div>
+      <div class="modal-body">
+        <h2 class="fs-lg text-white text-center text-decoration mb-lg p-sm" style="background-color :#292929;">Add New Project Manager</h2>
+        <form class="text-white">
+          <table>
+            <tbody>
+              <tr>
+                <td><label for="Country">Country :</label></td>
+                <td class="mb-md p-sm">
+                  <select class="form-select form-control form-select-default rounded-3" aria-label=".form-select-default example" id="Country">
+                    <option selected>Open this select menu</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="Name">Name :</label></td>
+                <td class="mb-md p-sm">
+                  <div class="input-group mb-3 position-relative">
+                    <div class="icon position-absolute end-0">
+                      <img src="../../../../assets/icons/user (3).png" alt="png img icon">
+                    </div>
+                    <input type="text" class="form-control rounded-3" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="Name">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="Email">Email :</label></td>
+                <td class="mb-md p-sm">
+                  <div class="input-group mb-3 position-relative">
+                    <div class="icon position-absolute end-0">
+                      <img src="../../../../assets/icons/mail.png" alt="png img icon">
+                    </div>
+                    <input type="email" class="form-control rounded-3" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="Email">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="Phone Number">Phone Number :</label></td>
+                <td class="mb-md p-sm">
+                  <div class="input-group mb-3 position-relative">
+                    <div class="icon position-absolute end-0">
+                      <img src="../../../../assets/icons/telephone.png" alt="png img icon">
+                    </div>
+                    <input type="text" class="form-control rounded-3" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="Phone Number">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="Password">Password :</label></td>
+                <td class="mb-md p-sm">
+                  <div class="input-group mb-3 position-relative">
+                    <div class="icon position-absolute end-0">
+                      <img src="../../../../assets/icons/padlock (3).png" alt="png img icon">
+                    </div>
+                    <input type="password" class="form-control rounded-3" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="Password">
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td><label for="Confirm Password">Confirm Password :</label></td>
+                <td class="mb-md p-sm">
+                  <div class="input-group mb-3 position-relative">
+                    <div class="icon position-absolute end-0">
+                      <img src="../../../../assets/icons/padlock (3).png" alt="png img icon">
+                    </div>
+                    <input type="text" class="form-control rounded-3" aria-label="Default" aria-describedby="inputGroup-sizing-default" id="Confirm Password">
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+          <div class="d-flex justify-content-center align-items-center mt-sm">
+            <button type="button" class="btn rounded-3 text-white" style="background-color: #2a2a2a; border: 2px solid #aaa5a5;">Add New Project Manager</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop fade show text-light" *ngIf="show" (click)="close()"></div>
+
+
+
+<div class="glass-effect position-absolute start-0 top-0 d-flex justify-content-center align-items-center" *ngIf="show_delete">
+  <div class="h-25 w-50 p-sm d-flex flex-column justify-content-center align-items-center" style="background-color: #661919;">
+    <p class="text-white fw-bold display-5 text-center">Are You Sure You Want Delete This Project Manager</p>
+    <div class="d-flex justify-content-around align-items-center w-75">
+      <button class="btn rounded-3 text-white" style="border: 4px solid #ff0000; background-color: #792c2c;">Delete</button>
+      <button class="btn rounded-3 text-white" style="border: 3px solid white; background-color: #792c2c;" (click)="show_delete=false">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="glass-effect position-absolute start-0 top-0 d-flex justify-content-center align-items-center" *ngIf="show_right">
+  <div class="h-25 w-50 p-sm d-flex flex-column justify-content-center align-items-center" style="background-color: #013c11;">
+    <p class="text-white fw-bold display-5 text-center">Are You Sure You Want Activate This Project Manager</p>
+    <div class="d-flex justify-content-around align-items-center w-75">
+      <button class="btn rounded-3 text-white" style="border: 4px solid #075914; background-color: #075914;">Activate</button>
+      <button class="btn rounded-3 text-white" style="border: 3px solid white; background-color: transparent;" (click)="show_right=false">Cancel</button>
+    </div>
+  </div>
+</div>
+
+
+

@@ -1,0 +1,20 @@
+<ngx-datatable
+[scrollbarH]="true"
+[scrollbarV]="true"
+ class="material"
+ [columnMode]="'force'"
+ [headerHeight]="50"
+ [footerHeight]="0"
+ [rowHeight]="50"
+ rowHeight="auto"
+ [rows]="rows"
+ [limit]="3"
+>
+ <ngx-datatable-column class="bg-danger" name="Client Request Order" prop="Client Request Order" [width]="200"></ngx-datatable-column>
+ <ngx-datatable-column name="Laundry Confirmed Order" prop="Laundry Confirmed Order" [width]="200"></ngx-datatable-column>
+ <ngx-datatable-column name="Sent delivery To Client" prop="Sent delivery To Client" [width]="200"></ngx-datatable-column>
+ <ngx-datatable-column name="delivery Man Arrived" prop="delivery Man Arrived" [width]="200"></ngx-datatable-column>
+ <ngx-datatable-column name="Laundry Working on order" prop="Laundry Working on order" [width]="200"></ngx-datatable-column>
+ <ngx-datatable-column name="delivery send order" prop="delivery send order" [width]="200"></ngx-datatable-column>
+ <ngx-datatable-column name="Order delieverd" prop="Order delieverd" [width]="200"></ngx-datatable-column>
+</ngx-datatable>

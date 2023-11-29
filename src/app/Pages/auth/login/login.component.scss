@@ -1,0 +1,130 @@
+$shadow : #09fbc1;
+$bg-input : #040404;
+$icon-color : #a4a4a4;
+
+
+main
+{
+
+  &
+  {
+    min-height: 100vh;
+    height: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h1
+    {
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    background:
+    {
+      image : url("../../../../assets/images/bg.png");
+      position: center center;
+      size : cover;
+    };
+  }
+
+  .container
+  {
+
+    #logo
+    {
+      width: 20%;
+    }
+    div[class^="col-"]
+    {
+      a
+      {
+        text-decoration: underline;
+        text-decoration-color: $shadow;
+      }
+    }
+    #link
+    {
+      width: 50%;
+    }
+    .input-group
+    {
+      &
+      {
+        width: 50%;
+      }
+       .icon
+       {
+         height: 100%;
+         width: 45px;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         z-index: 2;
+         color : $icon-color;
+
+       }
+    }
+    input
+    {
+      &
+      {
+        padding:
+        {
+          left : 3rem;
+        };
+        background:
+        {
+          color: $bg-input;
+        };
+        box-shadow: $shadow 1px 1px 10px 0px inset;
+        border: 1px solid $shadow;
+      }
+      &:focus
+      {
+        z-index: 1;
+      }
+    }
+    button
+    {
+      background:
+      {
+        color: $bg-input;
+      };
+      border: 1px solid $shadow;
+      box-shadow: $shadow 1px 1px 10px 0px inset;
+      width: 25%;
+      color: $icon-color;
+    }
+  }
+}
+
+
+@media only screen and (max-width : 992px)
+{
+  main
+  {
+    .container
+    {
+      div[class^="col-"]
+      {
+        .input-group
+        {
+          width: 100%;
+        }
+        #logo
+        {
+          width: 35%;
+        }
+      }
+      #link
+      {
+        width: 100%;
+      }
+      button
+      {
+        width: 50%;
+      }
+    }
+  }
+}

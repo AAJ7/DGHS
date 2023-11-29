@@ -1,0 +1,151 @@
+<main id="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-2 col-md-12 col-sm-12">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="col-lg-10 p-0">
+        <app-navbar></app-navbar>
+        <div class="row p-sm m-0">
+          <div class="col-lg-4 d-flex justify-content-center align-items-center">
+            <div class="input-group position-relative">
+              <div class="icon position-absolute end-0">
+                <img src="../../../../assets/icons/loupe.png" alt="png img icon">
+              </div>
+              <input
+              type="text"
+              class="form-control rounded-3 text-white"
+              aria-label="Default"
+              aria-describedby="inputGroup-sizing-default"
+              placeholder="Search"
+              [(ngModel)]= "searchText"
+              (keyup)="filter($any($event).target.value)">
+            </div>
+          </div>
+          <div class="col-lg-4 d-flex justify-content-around align-items-center buttons">
+            <button type="button" class="btn Search rounded-4 text-white ms-sm">Search</button>
+            <button type="button" class="btn Cancel rounded-4 text-white ms-sm" (click)="cancelSearch()">Cancel Search</button>
+          </div>
+          <div class="col-lg-4 d-flex justify-content-around align-items-center buttons">
+            <select class="form-select text-white rounded-3 custom-select me-sm" aria-label="Default select example" (change)="onChangeCompanies($event)">
+              <option disabled selected>Companies</option>
+              <option  *ngFor="let item of rows_Companies" value="{{item.id}}">{{item.name}}</option>
+            </select>
+
+            <select class="form-select text-white rounded-3 custom-select" aria-label="Default select example" (change)="onChangeDriversManagers($event)">
+              <option disabled selected>Drivers Managers</option>
+              <option  *ngFor="let item of rows_DriversManagers" value="{{item.id}}">{{item.name}}</option>
+            </select>
+          </div>
+          <div class="col-lg-12 d-flex justify-content-start align-items-center mt-md">
+            <button type="button" class="btn Add rounded-4 text-white ms-sm" (click)="openCreateForm()">Add New company <img src="../../../../assets/icons/add.png" alt="add img png"></button>
+          </div>
+          <div class="col-lg-12 mt-md p-sm">
+            <ngx-datatable
+            [scrollbarH]="true"
+            [scrollbarV]="true"
+            class="material"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="70"
+            rowHeight="auto"
+            [rows]="rows"
+            [limit]="3">
+            <ngx-datatable-column name="ID"    prop="id" [width]="80"></ngx-datatable-column>
+            <ngx-datatable-column name="Company ID"    prop="company_id" [width]="80"></ngx-datatable-column>
+            <ngx-datatable-column name="Company Name"    prop="company_name" [width]="80"></ngx-datatable-column>
+            <ngx-datatable-column name="Drivers Manager ID" prop="drivers_manager_id" [width]="80"></ngx-datatable-column>
+            <ngx-datatable-column name="Drivers Manager Name" prop="drivers_manager_name" [width]="80"></ngx-datatable-column>
+            <ngx-datatable-column name="Created At" prop="created_at" [width]="300">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <ng-container>
+                  {{row.created_at | date:'EEEE, MMMM d, y, h:mm:ss a'}}
+                </ng-container>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column
+            name="Actions"
+            [sortable]="false"
+            prop="id"
+            [width]="100"
+            [minWidth]="100"
+            [resizeable]="true">
+            <ng-template
+              let-row="row"
+              let-value="value"
+              let-rowIndex="rowIndex"
+              ngx-datatable-cell-template>
+              <img src="../../../../assets/icons/trash_2.png" alt="img png" style="cursor: pointer;" class="me-sm" (click)="GetDelete(row.id)">
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Add Company -->
+<div class="modal fade show d-block" tabindex="-1" *ngIf="show_create" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background-color:#191919; width: 500px;">
+      <div class="d-flex justify-content-end align-items-center">
+        <i class="fa-solid fa-xmark fa-3x p-sm" (click)="close_create()" style="color: white; cursor: pointer;"></i>
+      </div>
+      <div class="modal-body">
+        <h2 class="fs-lg text-white text-center text-decoration mb-lg p-sm" style="background-color :#292929;">Add New Country Manager
+        </h2>
+        <form class="text-white" [formGroup]="Create_Form" (ngSubmit)="CreateForm(Create_Form)">
+          <div class="d-flex justify-content-around align-items-center mb-md">
+            <div class="col-3">
+              <label>Companies :</label>
+            </div>
+           <div class="col-9">
+            <div class="input-group mb-3">
+              <select class="form-select rounded-3 custom-select me-sm" aria-label="Default select example" (change)="onChangeCompaniesCreate($event)">
+                <option disabled selected>Companies</option>
+                <option  *ngFor="let item of rows_Companies" value="{{item.id}}">{{item.name}}</option>
+              </select>
+            </div>
+           </div>
+          </div>
+          <div class="d-flex justify-content-around align-items-center mb-md">
+            <div class="col-4">
+              <label>Drivers Managers :</label>
+            </div>
+           <div class="col-8">
+            <div class="input-group mb-3">
+              <select class="form-select rounded-3 custom-select me-sm" aria-label="Default select example" (change)="onChangeDriversManagersCreate($event)">
+                <option disabled selected>Drivers Managers</option>
+                <option  *ngFor="let item of rows_DriversManagers" value="{{item.id}}">{{item.name}}</option>
+              </select>
+            </div>
+           </div>
+          </div>
+          <div class="d-flex justify-content-center align-items-center mt-sm" *ngIf="!loader_create">
+            <button type="submit" class="btn rounded-3 text-white" style="background-color: #2a2a2a; border: 2px solid #aaa5a5;" [disabled]="!Create_Form.valid">Add New Company</button>
+          </div>
+        </form>
+        <div class="d-flex justify-content-center align-items-center" *ngIf="loader_create">
+          <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete ID -->
+<div class="glass-effect position-absolute start-0 top-0 d-flex justify-content-center align-items-center" *ngIf="show_delete">
+  <div class="h-25 w-50 p-sm d-flex flex-column justify-content-center align-items-center" style="background-color: #661919;">
+    <p class="text-white fw-bold display-5 text-center">Are You Sure You Want Delete This Dirver Manager</p>
+    <div class="d-flex justify-content-around align-items-center w-75" *ngIf="!loader_delete">
+      <button class="btn rounded-3 text-white" style="border: 4px solid #ff0000; background-color: #792c2c;" (click)="delete()">Delete</button>
+      <button class="btn rounded-3 text-white" style="border: 3px solid white; background-color: #792c2c;" (click)="show_delete=false">Cancel</button>
+    </div>
+    <div class="d-flex justify-content-center align-items-center" *ngIf="loader_delete">
+      <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+    </div>
+  </div>
+</div>

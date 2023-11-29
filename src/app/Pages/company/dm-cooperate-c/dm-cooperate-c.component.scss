@@ -1,0 +1,278 @@
+$bg-input : #040404;
+$shadow-input : #01a2a3;
+$border-input : #01a2a3;
+$border : #09fbc1;
+$border-table : #04765b;
+
+
+main {
+  & {
+    min-height: 100vh;
+    background : {
+      image : url("../../../../assets/images/bg-home.png");
+      position: center center;
+      size : cover;
+    };
+  }
+  .container-fluid {
+    .row {
+      .col-lg-2 {
+        & {
+          border : 3px solid $border;
+        }
+      }
+      .col-lg-10 {
+        .row {
+          .col-lg-4 {
+            .input-group {
+              .icon {
+                z-index: 6;
+                width: 50px;
+                height:100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+              input {
+                border: 3px solid #00fff7;
+                box-shadow: 0px 1px 10px inset #00fff7;
+                background-color: #040404;
+              }
+            }
+            .Search {
+              border: 3px solid #00ff88;
+              box-shadow: 0px 1px 15px inset #00ff88;
+              background-color: #040404;
+            }
+            .Cancel {
+              border: 3px solid #ff0000;
+              box-shadow: 0px 1px 15px inset #ff0000;
+              background-color: #040404;
+            }
+          }
+          .col-lg-4 {
+            .form-select {
+              background-color: black;
+              box-shadow: 0px 10px 15px inset #024e45;
+              color : white;
+              border: 3px solid #008cad;
+              background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='white' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+            }
+          }
+          .col-lg-12 {
+            ::ng-deep .datatable-body-cell , ::ng-deep .datatable-header-cell , ::ng-deep .datatable-footer {
+              padding: 10px !important;
+              border: 2px solid $border-table;
+              background-color: $bg-input !important;
+              color : white !important;
+            }
+            ::ng-deep .ngx-datatable {
+              height: 550px;
+            }
+          }
+          .col-lg-12{
+              .Add {
+                border : 3px solid #ffe600;
+                box-shadow: 0px 1px 15px inset #ffe600;
+                background-color: #040404;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+.icon {
+  z-index: 6;
+  width: 50px;
+  height:100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.glass-effect {
+  height : 100vh;
+  width: 100%;
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.2);
+  // border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 40px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+.checkbox-wrapper-7 .tgl {
+  display: none;
+}
+.checkbox-wrapper-7 .tgl,
+.checkbox-wrapper-7 .tgl:after,
+.checkbox-wrapper-7 .tgl:before,
+.checkbox-wrapper-7 .tgl *,
+.checkbox-wrapper-7 .tgl *:after,
+.checkbox-wrapper-7 .tgl *:before,
+.checkbox-wrapper-7 .tgl + .tgl-btn {
+  box-sizing: border-box;
+}
+.checkbox-wrapper-7 .tgl::-moz-selection,
+.checkbox-wrapper-7 .tgl:after::-moz-selection,
+.checkbox-wrapper-7 .tgl:before::-moz-selection,
+.checkbox-wrapper-7 .tgl *::-moz-selection,
+.checkbox-wrapper-7 .tgl *:after::-moz-selection,
+.checkbox-wrapper-7 .tgl *:before::-moz-selection,
+.checkbox-wrapper-7 .tgl + .tgl-btn::-moz-selection,
+.checkbox-wrapper-7 .tgl::selection,
+.checkbox-wrapper-7 .tgl:after::selection,
+.checkbox-wrapper-7 .tgl:before::selection,
+.checkbox-wrapper-7 .tgl *::selection,
+.checkbox-wrapper-7 .tgl *:after::selection,
+.checkbox-wrapper-7 .tgl *:before::selection,
+.checkbox-wrapper-7 .tgl + .tgl-btn::selection {
+  background: none;
+}
+.checkbox-wrapper-7 .tgl + .tgl-btn {
+  outline: 0;
+  display: block;
+  width: 4em;
+  height: 2em;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.checkbox-wrapper-7 .tgl + .tgl-btn:after,
+.checkbox-wrapper-7 .tgl + .tgl-btn:before {
+  position: relative;
+  display: block;
+  content: "";
+  width: 50%;
+  height: 100%;
+}
+.checkbox-wrapper-7 .tgl + .tgl-btn:after {
+  left: 0;
+}
+.checkbox-wrapper-7 .tgl + .tgl-btn:before {
+  display: none;
+}
+.checkbox-wrapper-7 .tgl:checked + .tgl-btn:after {
+  left: 50%;
+}
+.checkbox-wrapper-7 .tgl-ios + .tgl-btn {
+  background: #fbfbfb;
+  border-radius: 2em;
+  padding: 2px;
+  transition: all 0.4s ease;
+  border: 1px solid #e8eae9;
+}
+.checkbox-wrapper-7 .tgl-ios + .tgl-btn:after {
+  border-radius: 2em;
+  background: #fbfbfb;
+  transition: left 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s ease, margin 0.3s ease;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 4px 0 rgba(0, 0, 0, 0.08);
+}
+.checkbox-wrapper-7 .tgl-ios + .tgl-btn:hover:after {
+  will-change: padding;
+}
+.checkbox-wrapper-7 .tgl-ios + .tgl-btn:active {
+  box-shadow: inset 0 0 0 2em #e8eae9;
+}
+.checkbox-wrapper-7 .tgl-ios + .tgl-btn:active:after {
+  padding-right: 0.8em;
+}
+.checkbox-wrapper-7 .tgl-ios:checked + .tgl-btn {
+  background: #86d993;
+}
+.checkbox-wrapper-7 .tgl-ios:checked + .tgl-btn:active {
+  box-shadow: none;
+}
+.checkbox-wrapper-7 .tgl-ios:checked + .tgl-btn:active:after {
+  margin-left: -0.8em;
+}
+@media only screen and (max-width: 1400px) and (min-width: 992px) {
+  main {
+    .container-fluid {
+      .row {
+        .col-lg-2 {
+          & {
+            width: 25%;
+          }
+        }
+        .col-lg-10 {
+          & {
+            width: 75%;
+          }
+        }
+      }
+    }
+  }
+}
+@media only screen and (max-width: 992px) {
+  main {
+    .container-fluid {
+      .row {
+        .col-lg-10 {
+          .col-lg-4 {
+            margin-top: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+}

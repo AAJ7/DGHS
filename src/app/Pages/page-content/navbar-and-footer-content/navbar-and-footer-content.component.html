@@ -1,0 +1,114 @@
+<main id="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-2 col-md-12 col-sm-12">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="col-lg-10 col-md-12 col-sm-12 p-0">
+        <app-navbar></app-navbar>
+        <div class="container-fluid p-lg">
+          <h2>Edit</h2>
+          <form [formGroup]="Update_Form" (ngSubmit)="Update(Update_Form)">
+            <div class="row mb-lg mt-lg">
+              <div class="col-lg-3 col-md-12 col-sm-12">
+                <h3 class="text-white text-start">Footer Title in Arabic</h3>
+              </div>
+              <div class="col-lg-9 col-md-12 col-sm-12">
+                <div class="input-group">
+                <input type="text" formControlName="footer_title_ar" class="text-white rounded-3 form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+              </div>
+            </div>
+  
+            <div class="row mt-lg">
+              <div class="col-lg-3 col-md-12 col-sm-12">
+                <h3 class="text-white text-start">Footer Title in English</h3>
+              </div>
+              <div class="col-lg-9 col-md-12 col-sm-12">
+                <div class="input-group">
+                <input type="text" formControlName="footer_title_en" class="text-white rounded-3 form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+              </div>
+            </div>
+  
+            <div class="row mt-lg">
+              <div class="col-lg-3 col-md-12 col-sm-12">
+                <h3 class="text-white text-start">Footer Content in Arabic</h3>
+              </div>
+              <div class="col-lg-9 col-md-12 col-sm-12">
+                <textarea formControlName="footer_content_ar" class="text-white rounded-3 form-control" rows="5"></textarea>
+              </div>
+            </div>
+  
+            <div class="row mt-lg">
+              <div class="col-lg-3 col-md-12 col-sm-12">
+                <h3 class="text-white text-start">Footer Content in English</h3>
+              </div>
+              <div class="col-lg-9 col-md-12 col-sm-12">
+                <textarea formControlName="footer_content_en" class="text-white rounded-3 form-control" rows="5"></textarea>
+              </div>
+            </div>
+  
+            <div class="row mb-lg mt-lg">
+              <div class="col-lg-3 col-md-12 col-sm-12">
+                <h3 class="text-white text-start">Twitter Link</h3>
+              </div>
+              <div class="col-lg-9 col-md-12 col-sm-12">
+                <div class="input-group">
+                <input formControlName="twitter_link" type="text" class="text-white rounded-3 form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+              </div>
+            </div>
+  
+            <div class="row mt-lg">
+              <div class="col-lg-3 col-md-12 col-sm-12">
+                <h3 class="text-white text-start">Facebook Link</h3>
+              </div>
+              <div class="col-lg-9 col-md-12 col-sm-12">
+                <div class="input-group">
+                <input formControlName="facebook_link" type="text" class="text-white rounded-3 form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+              </div>
+            </div>
+            <div class="row mt-lg">
+              <div class="col-lg-3 col-md-12 col-sm-12">
+                <h3 class="text-white text-start">Instgram Link</h3>
+              </div>
+              <div class="col-lg-9 col-md-12 col-sm-12">
+                <div class="input-group">
+                <input formControlName="instagram_link" type="text" class="text-white rounded-3 form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+              </div>
+            </div>
+            <div class="row mt-lg">
+              <div class="col-lg-3 col-md-12 col-sm-12">
+                <h3 class="text-white text-start">Whats app Number</h3>
+              </div>
+              <div class="col-lg-9 col-md-12 col-sm-12">
+                <div class="input-group">
+                <input type="text" formControlName="whatsapp_number" class="text-white rounded-3 form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+              </div>
+            </div>
+            <div class="row mt-lg">
+              <div class="col-lg-3 col-md-12 col-sm-12">
+                <h3 class="text-white text-start">Phone Number</h3>
+              </div>
+              <div class="col-lg-9 col-md-12 col-sm-12">
+                <div class="input-group">
+                <input formControlName="phone_number" type="text" class="text-white rounded-3 form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center mt-sm"  *ngIf="!loader_update">
+              <button type="submit" class="btn rounded-3 w-25 text-white" style="background-color: #2a2a2a; border: 2px solid #aaa5a5;">Done</button>
+            </div>
+          </form>
+          <div class="d-flex justify-content-center align-items-center" *ngIf="loader_update">
+            <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

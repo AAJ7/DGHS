@@ -1,0 +1,482 @@
+<main id="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-2 col-md-12 col-sm-12">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="col-lg-10 col-md-12 col-sm-12 p-0">
+        <app-navbar></app-navbar>
+        <div class="row p-sm m-0">
+          <div class="col-lg-4">
+            <div class="input-group position-relative">
+              <div class="icon position-absolute end-0">
+                <img src="../../../../assets/icons/loupe.png" alt="png img icon">
+              </div>
+              <input
+              type="text"
+              class="form-control rounded-3 text-white"
+              aria-label="Default"
+              aria-describedby="inputGroup-sizing-default"
+              placeholder="Search"
+              [(ngModel)]= "searchText"
+              (keyup)="filter($any($event).target.value)">
+            </div>
+          </div>
+          <div class="col-lg-4 d-flex justify-content-around align-items-center buttons">
+            <button type="button" class="btn Search rounded-4 text-white ms-sm">Search</button>
+            <button type="button" class="btn Cancel rounded-4 text-white ms-sm" (click)="cancelSearch()">Cancel Search</button>
+          </div>
+          <div class="col-lg-4 d-flex justify-content-around align-items-center buttons">
+            <select class="form-select text-white rounded-3 me-sm custom-select" aria-label="Default select example" (change)="onChangeCompanies($event)">
+              <option disabled selected>Companies</option>
+              <option *ngFor="let item of rows_Companies" value="{{item.id}}">{{item.name}}</option>
+            </select>
+
+            <select class="form-select text-white rounded-3 custom-select" aria-label="Default select example" (change)="onChangeCategories($event)">
+              <option disabled selected>Categories</option>
+              <option *ngFor="let item of rows_Categories" value="{{item.id}}">{{item.name}}</option>
+            </select>
+          </div>
+          <div class="col-lg-12 d-flex justify-content-start align-items-center mt-md">
+            <button type="button" class="btn Add rounded-4 text-white ms-sm" (click)="openCreateForm()">Add New Product <img src="../../../../assets/icons/add.png" alt="add img png"></button>
+          </div>
+          <div class="col-lg-12 mt-md p-sm">
+            <ngx-datatable
+            [scrollbarH]="true"
+            [scrollbarV]="true"
+            class="material"
+            [columnMode]="'force'"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="70"
+            rowHeight="auto"
+            [rows]="rows"
+            [limit]="3">
+            <ngx-datatable-column name="ID" prop="id" [width]="50"></ngx-datatable-column>
+            <ngx-datatable-column name="Company ID" prop="company_id" [width]="100"></ngx-datatable-column>
+            <ngx-datatable-column name="Category ID" prop="category_id" [width]="100"></ngx-datatable-column>
+            <ngx-datatable-column name="Name in Arabic" prop="name_ar" [width]="100"></ngx-datatable-column>
+            <ngx-datatable-column name="Name in English" prop="name_en" [width]="100"></ngx-datatable-column>
+            <ngx-datatable-column name="Status" prop="active" [width]="70">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <ng-container *ngIf="row.active == 1">
+                  <div class="checkbox-wrapper-7">
+                    <input class="tgl tgl-ios" checked disabled id="cb2-7" type="checkbox"/>
+                    <label class="tgl-btn" for="cb2-7"></label>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="row.active == 0">
+                  <div class="checkbox-wrapper-7">
+                    <input class="tgl tgl-ios" disabled id="cb2-7" type="checkbox"/>
+                    <label class="tgl-btn" for="cb2-7"></label>
+                  </div>
+                </ng-container>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Image" prop="img_path" [width]="100">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <ng-container>
+                  <img [src]="'https://dev.generalhouseservices.com/' + row.img_path" alt="Image" width="80" height="50"/>
+                </ng-container>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Created At" prop="created_at" [width]="300">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <ng-container>
+                  {{row.created_at | date:'EEEE, MMMM d, y, h:mm:ss a'}}
+                </ng-container>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Updated At" prop="updated_at" [width]="300">
+              <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                <ng-container>
+                  {{row.updated_at | date:'EEEE, MMMM d, y, h:mm:ss a'}}
+                </ng-container>
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column
+            name="Actions"
+            [sortable]="false"
+            prop="id"
+            [width]="250"
+            [minWidth]="250"
+            [resizeable]="true">
+            <ng-template
+              let-row="row"
+              let-value="value"
+              let-rowIndex="rowIndex"
+              ngx-datatable-cell-template>
+              <img src="../../../../assets/icons/editing.png" alt="img png" style="width: 40px; cursor: pointer;" class="me-sm" (click)="updateProduct(row)">
+              <img src="../../../../assets/icons/trash.png" alt="img png" style="width: 40px; cursor: pointer;" class="me-sm" (click)="GetProductId(row.id)">
+              <!-- <img src="../../../../assets/icons/traffic_signal.png" alt="img png"  style="width: 40px; cursor: pointer;" class="me-sm" (click)="active(row.id , row.active)"> -->
+            </ng-template>
+          </ngx-datatable-column>
+        </ngx-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<!-- Add New Product -->
+<div class="modal fade show d-block" tabindex="-1" *ngIf="show_create" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background-color:#191919;">
+      <div class="d-flex justify-content-end align-items-center" (click)="close_create()">
+        <i class="fa-solid fa-xmark fa-3x p-sm" (click)="close_create()" style="color: white; cursor: pointer;"></i>
+      </div>
+      <div class="modal-body">
+        <h2 class="fs-lg text-white text-center text-decoration mb-lg p-sm" style="background-color :#292929;">Add New Product</h2>
+        <form class="text-white" [formGroup]="Create_Form" (ngSubmit)="CreateForm(Create_Form)">
+          <div class="d-flex justify-content-around align-items-center mb-md">
+            <div class="col-3">
+              <label for="name_ar">Name in Ar : </label>
+            </div>
+           <div class="col-9">
+            <div class="input-group">
+              <input
+                    type="text"
+                    class="form-control rounded-3"
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                    id="name_ar"
+                    placeholder="Name in Arabic"
+                    formControlName="name_ar"
+                    />
+            </div>
+           </div>
+          </div>
+          <div class="d-flex justify-content-around align-items-center mb-md">
+            <div class="col-3">
+              <label for="name_en">Name in En : </label>
+            </div>
+           <div class="col-9">
+            <div class="input-group">
+              <input
+                    type="text"
+                    class="form-control rounded-3"
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                    id="name_en"
+                    placeholder="Name in English"
+                    formControlName="name_en"
+                    />
+            </div>
+           </div>
+          </div>
+          <div formArrayName="options">
+            <div *ngFor="let option of getOptions().controls; let i = index;" formGroupName="{{i}}">
+              <div class="pt-lg">
+                <h2>Options {{i+1}}</h2>
+              <div class="d-flex justify-content-around align-items-center mb-md">
+                <div class="col-5">
+                  <label for="options_name_ar">Name in Arabic : </label>
+                </div>
+               <div class="col-7">
+                <div class="input-group">
+                  <input
+                        type="text"
+                        class="form-control rounded-3"
+                        aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default"
+                        id="options_name_ar"
+                        placeholder="options Name in Arabic"
+                        formControlName="name_ar"
+                        />
+                </div>
+               </div>
+              </div>
+              <div class="d-flex justify-content-around align-items-center mb-md">
+                <div class="col-5">
+                  <label for="options_name_en">Name in English : </label>
+                </div>
+               <div class="col-7">
+                <div class="input-group">
+                  <input
+                        type="text"
+                        class="form-control rounded-3"
+                        aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default"
+                        id="options_name_en"
+                        placeholder="options Name in English"
+                        formControlName="name_en"
+                        />
+                </div>
+               </div>
+              </div>
+              <div class="d-flex justify-content-around align-items-center mb-md">
+                <div class="col-5">
+                  <label for="option_price_unit_ar">Price in Arabic : </label>
+                </div>
+               <div class="col-7">
+                <div class="input-group">
+                  <input
+                        type="text"
+                        class="form-control rounded-3"
+                        aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default"
+                        id="option_price_unit_ar"
+                        placeholder="options Price Unit in Arabic"
+                        formControlName="price_unit_ar"
+                        />
+                </div>
+               </div>
+              </div>
+              <div class="d-flex justify-content-around align-items-center mb-md">
+                <div class="col-5">
+                  <label for="option_price_unit_en">Price in English : </label>
+                </div>
+               <div class="col-7">
+                <div class="input-group">
+                  <input
+                        type="text"
+                        class="form-control rounded-3"
+                        aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default"
+                        id="option_price_unit_en"
+                        placeholder="options Price Unit in English"
+                        formControlName="price_unit_en"
+                        />
+                </div>
+               </div>
+              </div>
+              <div class="d-flex justify-content-around align-items-center mb-md">
+                <div class="col-5">
+                  <label for="option_price">Price : </label>
+                </div>
+               <div class="col-7">
+                <div class="input-group">
+                  <input
+                        type="number"
+                        class="form-control rounded-3"
+                        aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default"
+                        id="option_price"
+                        placeholder="options Price"
+                        formControlName="price"
+                        />
+                </div>
+               </div>
+              </div>
+              <div class="d-flex justify-content-center align-items-center mt-sm mb-sm">
+                <button type="button" class="btn rounded-3 text-white" style="background-color: #2a2a2a; border: 2px solid #aaa5a5;" (click)="removeOptionOnCreate(i)">Remove option</button>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center align-items-center mt-sm mb-sm">
+            <button type="button" class="btn rounded-3 text-white" style="background-color: #2a2a2a; border: 2px solid #aaa5a5;" (click)="addOptionOnCreate()">Add option</button>
+          </div>
+          <div class="d-flex justify-content-around align-items-center">
+            <div class="col-3">
+              <label for="img">Image : </label>
+            </div>
+           <div class="col-9">
+            <div class="input-group">
+              <input
+                    type="file"
+                    class="form-control rounded-3"
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                    id="img"
+                    placeholder="Name in Arabic"
+                    (change)="onFileSelected($event , 'add')"
+                    accept="image/*" />
+            </div>
+           </div>
+          </div>
+          <img src="{{Base64}}" alt="Image" class="w-100 mt-sm">
+          <div class="d-flex justify-content-center align-items-center mt-sm" *ngIf="!loader_create">
+            <button type="submit" class="btn rounded-3 text-white" style="background-color: #2a2a2a; border: 2px solid #aaa5a5;" [disabled]="!Create_Form.valid">Add New Product</button>
+          </div>
+        </form>
+        <div class="d-flex justify-content-center align-items-center" *ngIf="loader_create">
+          <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Update Product -->
+<div class="modal fade show d-block" tabindex="-1" *ngIf="show_update" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background-color:#191919;">
+      <div class="d-flex justify-content-end align-items-center" (click)="close_update()">
+        <i class="fa-solid fa-xmark fa-3x p-sm" (click)="close_update()" style="color: white; cursor: pointer;"></i>
+      </div>
+      <div class="modal-body">
+        <h2 class="fs-lg text-white text-center text-decoration mb-lg p-sm" style="background-color :#292929;">Update Product</h2>
+        <form class="text-white" [formGroup]="Update_Form" (ngSubmit)="UpdateForm(Update_Form)">
+          <div class="d-flex justify-content-around align-items-center mb-md">
+            <div class="col-3">
+              <label for="name_ar">Name in Ar : </label>
+            </div>
+           <div class="col-9">
+            <div class="input-group">
+              <input
+                    type="text"
+                    class="form-control rounded-3"
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                    id="name_ar"
+                    placeholder="Name in Arabic"
+                    formControlName="name_ar"
+                    />
+            </div>
+           </div>
+          </div>
+          <div class="d-flex justify-content-around align-items-center mb-md">
+            <div class="col-3">
+              <label for="name_en">Name in En : </label>
+            </div>
+           <div class="col-9">
+            <div class="input-group">
+              <input
+                    type="text"
+                    class="form-control rounded-3"
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                    id="name_en"
+                    placeholder="Name in English"
+                    formControlName="name_en"
+                    />
+            </div>
+           </div>
+          </div>
+          <div formArrayName="options">
+            <div *ngFor="let option of getOptionsUpdate().controls; let i = index;" formGroupName="{{i}}">
+              <div class="pt-lg">
+                <h2>Options {{i+1}}</h2>
+              <div class="d-flex justify-content-around align-items-center mb-md">
+                <div class="col-5">
+                  <label for="options_name_ar">Name in Arabic : </label>
+                </div>
+               <div class="col-7">
+                <div class="input-group">
+                  <input
+                        type="text"
+                        class="form-control rounded-3"
+                        aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default"
+                        id="options_name_ar"
+                        placeholder="options Name in Arabic"
+                        formControlName="name_ar"
+                        />
+                </div>
+               </div>
+              </div>
+              <div class="d-flex justify-content-around align-items-center mb-md">
+                <div class="col-5">
+                  <label for="options_name_en">Name in English : </label>
+                </div>
+               <div class="col-7">
+                <div class="input-group">
+                  <input
+                        type="text"
+                        class="form-control rounded-3"
+                        aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default"
+                        id="options_name_en"
+                        placeholder="options Name in English"
+                        formControlName="name_en"
+                        />
+                </div>
+               </div>
+              </div>
+              <div class="d-flex justify-content-around align-items-center mb-md">
+                <div class="col-5">
+                  <label for="option_price_unit_ar">Price in Arabic : </label>
+                </div>
+               <div class="col-7">
+                <div class="input-group">
+                  <input
+                        type="text"
+                        class="form-control rounded-3"
+                        aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default"
+                        id="option_price_unit_ar"
+                        placeholder="options Price Unit in Arabic"
+                        formControlName="price_unit_ar"
+                        />
+                </div>
+               </div>
+              </div>
+              <div class="d-flex justify-content-around align-items-center mb-md">
+                <div class="col-5">
+                  <label for="option_price_unit_en">Price in English : </label>
+                </div>
+               <div class="col-7">
+                <div class="input-group">
+                  <input
+                        type="text"
+                        class="form-control rounded-3"
+                        aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default"
+                        id="option_price_unit_en"
+                        placeholder="options Price Unit in English"
+                        formControlName="price_unit_en"
+                        />
+                </div>
+               </div>
+              </div>
+              <div class="d-flex justify-content-around align-items-center mb-md">
+                <div class="col-5">
+                  <label for="option_price">Price : </label>
+                </div>
+               <div class="col-7">
+                <div class="input-group">
+                  <input
+                        type="number"
+                        class="form-control rounded-3"
+                        aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default"
+                        id="option_price"
+                        placeholder="options Price"
+                        formControlName="price"
+                        />
+                </div>
+               </div>
+              </div>
+              <div class="d-flex justify-content-center align-items-center mt-sm mb-sm">
+                <button type="button" class="btn rounded-3 text-white" style="background-color: #2a2a2a; border: 2px solid #aaa5a5;" (click)="removeOptionOnUpdate(i)">Remove option</button>
+              </div>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center align-items-center mt-sm mb-sm">
+            <button type="button" class="btn rounded-3 text-white mt-lg" style="background-color: #2a2a2a; border: 2px solid #aaa5a5;" (click)="addOptionOnUpdate()">Add option</button>
+          </div>
+          <div class="d-flex justify-content-around align-items-center">
+            <div class="col-3">
+              <label for="img">Image : </label>
+            </div>
+           <div class="col-9">
+            <div class="input-group">
+              <input
+                    type="file"
+                    class="form-control rounded-3"
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                    id="img"
+                    placeholder="Name in Arabic"
+                    (change)="onFileSelected($event , 'add')"
+                    accept="image/*" />
+            </div>
+           </div>
+          </div>
+          <img src="{{Base64}}" alt="Image" class="w-100 mt-sm">
+          <div class="d-flex justify-content-center align-items-center mt-sm" *ngIf="!loader_update">
+            <button type="submit" class="btn rounded-3 text-white" style="background-color: #2a2a2a; border: 2px solid #aaa5a5;" [disabled]="!Update_Form.valid">Update Product</button>
+          </div>
+        </form>
+        <div class="d-flex justify-content-center align-items-center" *ngIf="loader_update">
+          <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+<main id="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-2 col-md-12 col-sm-12">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="col-lg-10 p-0">
+        <app-navbar></app-navbar>
+        <div class="row w-100 m-0">
+          <div class="col-lg-6 p-sm first-quad">
+            <div class="d-flex justify-content-around align-items-center">
+              <h2 class="text-white text-center">Orders Status</h2>
+              <div class="input-group mb-3 w-25 position-relative">
+                <div class="icon position-absolute start-0">
+                  <img src="../../../../assets/icons/loupe.png" alt="png img icon">
+                </div>
+                <input type="text" class="form-control text-white rounded-4" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Search" >
+              </div>
+             </div>
+             <app-home-orders-status></app-home-orders-status>
+          </div>
+          <div class="col-lg-6 p-sm second-quad">
+            <div class="d-flex justify-content-around align-items-center">
+              <h2 class="text-white text-center">Delivery status of the order</h2>
+              <div class="input-group mb-3 w-25 position-relative">
+                <div class="icon position-absolute start-0">
+                  <img src="../../../../assets/icons/loupe.png" alt="png img icon">
+                </div>
+                <input type="text" class="form-control text-white rounded-4" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Search" >
+              </div>
+             </div>
+             <app-home-delivery-status></app-home-delivery-status>
+          </div>
+          <div class="col-lg-6 p-sm third-quad">
+            <div class="d-flex justify-content-around align-items-center">
+              <h2 class="text-white text-center"> Payment status of the order</h2>
+              <div class="input-group mb-3 w-25 position-relative">
+                <div class="icon position-absolute start-0">
+                  <img src="../../../../assets/icons/loupe.png" alt="png img icon">
+                </div>
+                <input type="text" class="form-control text-white rounded-4" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Search" >
+              </div>
+             </div>
+           <app-home-payment-status></app-home-payment-status>
+          </div>
+          <div class="col-lg-6 p-sm forth-quad">
+            <div class="row h-100">
+            <div class="col-lg-6 area-chart">
+             <app-home-area-charts></app-home-area-charts>
+             </div>
+             <div class="col-lg-6 pie-chart">
+               <app-home-pie-charts></app-home-pie-charts>
+             </div>
+            </div>
+         </div>
+         <div class="col-lg-12 p-sm mt-md">
+          <app-home-maps></app-home-maps>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

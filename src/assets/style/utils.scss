@@ -1,0 +1,240 @@
+// Spacing
+$sizeUnit: rem;
+$marginKey: "m";
+$paddingKey: "p";
+$separator: "-";
+$sizes: (
+  ("none", 0),
+  ("xxs", 8px),
+  ("xs", 14px),
+  ("sm", 20px),
+  ("md", 24px),
+  ("lg", 40px),
+  ("xl", 80px),
+  ("xxl", 120px)
+);
+$positions: (("t", "top"), ("s", "left"), ("b", "bottom"), ("e", "right"));
+
+@function sizeValue($key, $value) {
+  @return if($key== "none", 0, $value + $sizeUnit);
+}
+[dir="ltr"] {
+  @each $size in $sizes {
+    $sizeKey: nth($size, 1);
+    $sizeValue: nth($size, 2);
+
+    .#{$marginKey}#{$separator}#{$sizeKey} {
+      @include margin($sizeValue);
+    }
+
+    .#{$paddingKey}#{$separator}#{$sizeKey} {
+      @include padding($sizeValue);
+    }
+
+    @each $position in $positions {
+      $posKey: nth($position, 1);
+      $posValue: nth($position, 2);
+
+      .#{$marginKey}#{$posKey}#{$separator}#{$sizeKey} {
+        @include rfs($sizeValue, margin-#{$posValue});
+      }
+
+      .#{$paddingKey}#{$posKey}#{$separator}#{$sizeKey} {
+        @include rfs($sizeValue, padding-#{$posValue});
+      }
+    }
+  }
+}
+
+.mb-col {
+  margin-bottom: $grid-gutter-width;
+  @include media-breakpoint-down(md) {
+    margin-bottom: rem(10px);
+  }
+}
+
+.mt-col {
+  margin-top: $grid-gutter-width;
+  @include media-breakpoint-down(md) {
+    margin-top: rem(10px);
+  }
+}
+
+.rounded-pill {
+  border-radius: 20rem !important;
+}
+
+.order {
+  &-lg {
+    @include media-breakpoint-down(lg) {
+      order: -1;
+    }
+  }
+
+  &-md {
+    @include media-breakpoint-down(md) {
+      order: -1;
+    }
+  }
+
+  &-sm {
+    @include media-breakpoint-down(sm) {
+      order: -1;
+    }
+  }
+}
+
+.fs {
+  &-xxl {
+    @include font-size(64px);
+  }
+  &-xl {
+    @include font-size(48px);
+  }
+  &-lg {
+    @include font-size(34px);
+  }
+  &-md {
+    @include font-size(24px);
+  }
+  &-sm {
+    @include font-size(18px);
+  }
+  &-xs {
+    @include font-size(14px);
+  }
+  &-xxs {
+    @include font-size(12px);
+  }
+}
+
+.max {
+  &-xxl {
+    max-width: rem(1000px);
+  }
+  &-xl {
+    max-width: rem(800px);
+  }
+  &-lg {
+    max-width: rem(600px);
+  }
+  &-md {
+    max-width: rem(400px);
+  }
+  &-sm {
+    max-width: rem(300px);
+  }
+  &-xs {
+    max-width: rem(260px);
+  }
+  &-xxs {
+    max-width: rem(140px);
+  }
+  &-120 {
+    max-width: rem(120px);
+  }
+  &-100 {
+    max-width: rem(100px);
+  }
+  &-80 {
+    max-width: rem(80px);
+  }
+}
+
+.bg-light {
+  &-primary {
+    background: rgba($primary, 0.1);
+  }
+  &-warning {
+    background: rgba($warning, 0.1);
+  }
+  &-dark {
+    background: rgba($dark, 0.05);
+  }
+  &-danger {
+    background: #C4A1A1;
+  }
+}
+
+.qtyInput {
+  display: flex;
+  align-items: center;
+  background: $gray-300;
+  border-radius: $input-border-radius;
+  justify-content: space-between;
+
+  padding: rem(4px) 0;
+  font-family: $input-font-family;
+  @include font-size($input-font-size);
+  font-weight: $input-font-weight;
+  line-height: $input-line-height;
+  user-select: none;
+  &-icon {
+    height: 100%;
+    padding: 0 rem(8px);
+    font-size: 1.5em;
+    cursor: pointer;
+  }
+}
+
+.shape {
+  &-top {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    @include media-breakpoint-down(md) {
+      max-width: 100px;
+    }
+  }
+}
+
+.fw-medium {
+  font-weight: $font-weight-medium;
+}
+
+.fw-semi {
+  font-weight: 600;
+}
+
+.font-base {
+  font-family: $font-family-base;
+}
+
+.bg-gray {
+  background: #B7BEC3;
+}
+
+.min-50 {
+  min-height: 50vh;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.w-100-sm {
+  @include media-breakpoint-down(sm) {
+    width: 100%;
+  }
+}
+
+.error-message {
+  color: red;
+  @include font-size(12px);
+  margin-top: rem(8px);
+}
+
+.break-word {
+  word-break: break-word;
+}
+
+.white-space {
+  white-space: nowrap;
+}
+
+.border-bottom {
+  border-bottom: 1px solid $gray-500;
+}

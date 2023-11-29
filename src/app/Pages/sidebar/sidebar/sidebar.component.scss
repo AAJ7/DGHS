@@ -1,0 +1,26 @@
+div {
+  .logo {
+    width : 50%;
+  }
+  .dropdown-menu {
+      border: 3px solid #1d7d7b;
+      background-color: black;
+      li {
+        a {
+          img {
+            width: 7%;
+          }
+        }
+        img {
+          width: 20%;
+        }
+      }
+  }
+}
+@media only screen and (max-width: 992px) {
+  div {
+    .logo {
+      width : 25%;
+    }
+  }
+}

@@ -1,0 +1,72 @@
+<main id="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-2 col-md-12 col-sm-12">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="col-lg-10 col-md-12 col-sm-12 p-0">
+        <app-navbar></app-navbar>
+        <div class="container-fluid p-lg">
+          <h2>Edit</h2>
+          <form [formGroup]="Update_Form" (ngSubmit)="Update(Update_Form)">
+          <div class="row mb-lg" *ngFor="let item of rows">
+            <div class="img">
+              <img [src]="'https://dev.generalhouseservices.com/' + item.img_path" class="mb-lg w-25">
+            </div>
+            
+              <div class="col-lg-3 col-md-12 col-sm-12">
+                <h3 class="text-white text-start">Image</h3>
+              </div>
+              <div class="col-lg-9 col-md-12 col-sm-12 mb-lg">
+                <div class="input-group">
+                  <input type="file" class="mb-lg text-white rounded-3 form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                  (change)="onFileSelected($event , item.id , item.active)"
+                  accept="image/*">
+                  </div>
+              </div>
+            <div class="col-lg-3 col-md-12 col-sm-12">
+              <h3 class="text-white text-start">Created At</h3>
+            </div>
+            <div class="col-lg-9 col-md-12 col-sm-12 mb-lg">
+              <div class="input-group">
+              <input type="text" [value]="item.created_at | date:'EEEE, MMMM d, y, h:mm:ss a'" class="text-white rounded-3 form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-12 col-sm-12 mb-lg">
+              <h3 class="text-white text-start">Updated At</h3>
+            </div>
+            <div class="col-lg-9 col-md-12 col-sm-12">
+              <div class="input-group">
+              <input type="text" [value]="item.updated_at | date:'EEEE, MMMM d, y, h:mm:ss a'" class="text-white rounded-3 form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-12 col-sm-12 mb-xl">
+              <h3 class="text-white text-start">Status</h3>
+            </div>
+            <div class="col-lg-9 col-md-12 col-sm-12">
+             <div *ngIf="item.active == 1">
+              <div class="checkbox-wrapper-7">
+                <input class="tgl tgl-ios" checked disabled id="cb2-7" type="checkbox"/>
+                <label class="tgl-btn" for="cb2-7"></label>
+              </div>
+             </div>
+             <div *ngIf="item.active == 0">
+              <div class="checkbox-wrapper-7">
+                <input class="tgl tgl-ios" disabled id="cb2-7" type="checkbox"/>
+                <label class="tgl-btn" for="cb2-7"></label>
+              </div>
+             </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center align-items-center mt-sm"  *ngIf="!loader_update">
+            <button type="submit" class="btn rounded-3 w-25 text-white" style="background-color: #2a2a2a; border: 2px solid #aaa5a5;">Done</button>
+          </div>
+        </form>
+          <div class="d-flex justify-content-center align-items-center" *ngIf="loader_update">
+            <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

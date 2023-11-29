@@ -1,0 +1,270 @@
+<main id="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-2 col-md-12 col-sm-12">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="col-lg-10 col-md-12 col-sm-12 p-0">
+        <app-navbar></app-navbar>
+        <div class="row p-sm m-0">
+          <div class="col-lg-4">
+            <div class="input-group position-relative">
+              <div class="icon position-absolute end-0">
+                <img src="../../../../assets/icons/loupe.png" alt="png img icon">
+              </div>
+              <input type="text" class="form-control rounded-3 text-white" aria-label="Default"
+                aria-describedby="inputGroup-sizing-default" placeholder="search" [(ngModel)]="searchText"
+                (keyup)="filter($any($event).target.value)">
+            </div>
+          </div>
+          <div class="col-lg-4 d-flex justify-content-around align-items-center buttons">
+            <button type="button" class="btn Search rounded-4 text-white ms-sm">Search</button>
+            <button type="button" class="btn Cancel rounded-4 text-white ms-sm" (click)="cancelSearch()">Cancel
+              Search</button>
+          </div>
+          <div class="col-lg-4 d-flex justify-content-around align-items-center">
+            <div class="col-4">
+              <h2 class="text-white">Countries</h2>
+            </div>
+            <div class="col-8">
+              <select class="form-select text-white rounded-3 custom-select" aria-label="Default select example"
+                (change)="onChangeCountries($event)">
+                <option [attr.selected]="item.id == id ? true : null" value="{{item.id}}"
+                  *ngFor="let item of rows_Countries">{{item.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-lg-12 d-flex justify-content-start align-items-center mt-md">
+            <button type="button" class="btn Add rounded-4 text-white ms-sm" (click)="openCreateForm()">Add New
+              Governorate <img src="../../../../assets/icons/add.png" alt="add img png"></button>
+          </div>
+          <div class="col-lg-12 mt-md p-sm">
+            <ngx-datatable [scrollbarH]="true" [scrollbarV]="true" class="material" [columnMode]="'force'"
+              [headerHeight]="50" [footerHeight]="50" [rowHeight]="70" rowHeight="auto" [rows]="rows" [limit]="3">
+              <ngx-datatable-column name="Governorate ID" prop="id" [width]="100"></ngx-datatable-column>
+              <ngx-datatable-column name="Name in Arabic" prop="name_ar" [width]="200"></ngx-datatable-column>
+              <ngx-datatable-column name="Name in English" prop="name_en" [width]="200"></ngx-datatable-column>
+              <ngx-datatable-column name="Status" prop="active" [width]="80">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <ng-container *ngIf="row.active == 1">
+                    <div class="checkbox-wrapper-7">
+                      <input class="tgl tgl-ios" checked disabled id="cb2-7" type="checkbox" />
+                      <label class="tgl-btn" for="cb2-7"></label>
+                    </div>
+                  </ng-container>
+                  <ng-container *ngIf="row.active == 0">
+                    <div class="checkbox-wrapper-7">
+                      <input class="tgl tgl-ios" disabled id="cb2-7" type="checkbox" />
+                      <label class="tgl-btn" for="cb2-7"></label>
+                    </div>
+                  </ng-container>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Created At" prop="created_at" [width]="300">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <ng-container>
+                    {{row.created_at | date:'EEEE, MMMM d, y, h:mm:ss a'}}
+                  </ng-container>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Updated At" prop="updated_at" [width]="300">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <ng-container>
+                    {{row.updated_at | date:'EEEE, MMMM d, y, h:mm:ss a'}}
+                  </ng-container>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Actions" [sortable]="false" prop="id" [width]="180" [minWidth]="180"
+                [resizeable]="true">
+                <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                  <img src="../../../../assets/icons/country.png" alt="img png" style="width: 40px; cursor: pointer;"
+                    class="me-sm" (click)="cities(row.id)">
+                  <img src="../../../../assets/icons/editing.png" alt="img png" style="width: 40px; cursor: pointer;"
+                    class="me-sm" (click)="UpdateGovernorate(row)">
+                  <img src="../../../../assets/icons/trash.png" alt="img png" style="width: 40px; cursor: pointer;"
+                    class="me-sm" (click)="GetGovernorateId(row.id)">
+                  <!-- <img src="../../../../assets/icons/traffic_signal.png" alt="img png" style="width: 40px; cursor: pointer;" class="me-sm" (click)="active(row.id , row.active)"> -->
+                </ng-template>
+              </ngx-datatable-column>
+            </ngx-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+<!-- Add New Governorate -->
+<div class="modal fade show d-block" tabindex="-1" *ngIf="show_create" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background-color:#191919;">
+      <div class="d-flex justify-content-end align-items-center">
+        <i class="fa-solid fa-xmark fa-3x p-sm" (click)="close_create()" style="color: white; cursor: pointer;"></i>
+      </div>
+      <div class="modal-body">
+        <h2 class="fs-lg text-white text-center text-decoration mb-lg p-sm" style="background-color :#292929;">Add New
+          Governorate</h2>
+        <form class="text-white" [formGroup]="Create_Form" (ngSubmit)="CreateForm(Create_Form)">
+          <div class="d-flex justify-content-around align-items-center mb-md">
+            <div class="col-4">
+              <label for="name_ar">Name in Arabic : </label>
+            </div>
+            <div class="col-8">
+              <div class="input-group">
+                <input type="text" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default" id="name_ar" placeholder="Name in Arabic"
+                  formControlName="name_ar" />
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-around align-items-center mb-md">
+            <div class="col-4">
+              <label for="name_en">Name in English </label>
+            </div>
+            <div class="col-8">
+              <div class="input-group">
+                <input type="text" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default" id="name_en" placeholder="Name in English"
+                  formControlName="name_en" />
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center align-items-center mt-sm" *ngIf="!loader_create">
+            <button type="submit" class="btn rounded-3 text-white"
+              style="background-color: #2a2a2a; border: 2px solid #aaa5a5;" [disabled]="!Create_Form.valid">Add New
+              Governorate</button>
+          </div>
+        </form>
+        <div class="d-flex justify-content-center align-items-center" *ngIf="loader_create">
+          <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Delete Governorate -->
+<div class="glass-effect position-absolute start-0 top-0 d-flex justify-content-center align-items-center"
+  *ngIf="show_delete">
+  <div class="h-25 w-50 p-sm d-flex flex-column justify-content-center align-items-center"
+    style="background-color: #661919;">
+    <p class="text-white fw-bold display-5 text-center">Are You Sure You Want Delete This Governorate</p>
+    <div class="d-flex justify-content-around align-items-center w-75" *ngIf="!loader_delete">
+      <button class="btn rounded-3 text-white" style="border: 4px solid #ff0000; background-color: #792c2c;"
+        type="button" (click)="deleteGovernorate()">Delete</button>
+      <button class="btn rounded-3 text-white" style="border: 3px solid white; background-color: #792c2c;"
+        (click)="show_delete=false">Cancel</button>
+    </div>
+    <div class="d-flex justify-content-center align-items-center" *ngIf="loader_delete">
+      <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Update Governorate -->
+<div class="modal fade show d-block" tabindex="-1" *ngIf="show_update" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background-color:#191919;">
+      <div class="d-flex justify-content-end align-items-center">
+        <i class="fa-solid fa-xmark fa-3x p-sm" (click)="close_update()" style="color: white; cursor: pointer;"></i>
+      </div>
+      <div class="modal-body">
+        <h2 class="fs-lg text-white text-center text-decoration mb-lg p-sm" style="background-color :#292929;">Update
+          Governorate</h2>
+        <form class="text-white" [formGroup]="Update_Form" (ngSubmit)="UpdateForm(Update_Form)">
+          <div class="d-flex justify-content-around align-items-center mb-md">
+            <div class="col-4">
+              <label for="name_Ar">Name in Arabic : </label>
+            </div>
+            <div class="col-8">
+              <div class="input-group">
+                <input type="text" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default" placeholder="Name in Arabic" formControlName="name_ar"
+                  id="name_Ar">
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-around align-items-center mb-md">
+            <div class="col-4">
+              <label for="name_En">Name in English : </label>
+            </div>
+            <div class="col-8">
+              <div class="input-group">
+                <input type="text" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default" placeholder="Name in English" formControlName="name_en"
+                  id="name_En">
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-around align-items-center mb-md">
+            <div class="col-3">
+              <label for="Status">Status :</label>
+            </div>
+            <div class="col-9">
+              <div class="checkbox-wrapper-22">
+                <!-- <label class="switch" for="checkbox">
+                <input type="checkbox" id="checkbox"
+                [checked]="checkedStatus"
+                (change)="checkedStatus = !checkedStatus" />
+                <div class="slider round"></div>
+              </label> -->
+                <label class="switch" for="checkbox">
+                  <input type="checkbox" disabled id="checkbox" [checked]="checkedStatus" (change)="update_active($event)" />
+                  <div class="slider round"></div>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center align-items-center mt-sm" *ngIf="!loader_update">
+            <button type="submit" class="btn rounded-3 text-white"
+              style="background-color: #2a2a2a; border: 2px solid #aaa5a5;">Update Governorate</button>
+          </div>
+        </form>
+        <div class="d-flex justify-content-center align-items-center" *ngIf="loader_update">
+          <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DiActivate || Activate -->
+<div class="glass-effect position-absolute start-0 top-0 d-flex justify-content-center align-items-center"
+  *ngIf="show_activate">
+  <div class="h-25 w-50 p-sm d-flex flex-column justify-content-center align-items-center"
+    [style.background-color]="!toggle ? '#717171 ' : '#013c11'">
+    <p class="text-white fw-bold display-5 text-center">{{active_letter}}</p>
+    <div class="d-flex justify-content-around align-items-center w-75" *ngIf="!loader_activate">
+      <button class="btn rounded-3 text-white" [style.border]="!toggle ? '4px solid #313131' : ' 4px solid #075913'"
+        [style.background-color]="!toggle ? '#717171 ' : '#075913'"
+        (click)="toggleActivate()">{{active_button}}</button>
+      <button class="btn rounded-3 text-white" style="border: 3px solid white;"
+        [style.background-color]="!toggle ? '#717171 ' : '#013c11'" (click)="show_activate=false">Cancel</button>
+    </div>
+    <div class="d-flex justify-content-center align-items-center" *ngIf="loader_activate">
+      <div class="lds-ellipsis">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+  </div>
+</div>

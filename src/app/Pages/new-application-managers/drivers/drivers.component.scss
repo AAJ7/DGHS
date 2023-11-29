@@ -1,0 +1,207 @@
+$bg-input : #040404;
+$shadow-input : #01a2a3;
+$border-input : #01a2a3;
+$border : #09fbc1;
+$border-table : #04765b;
+
+
+main
+{
+  &
+  {
+    min-height: 100vh;
+    background :
+    {
+      image : url("../../../../assets/images/bg-home.png");
+      position: center center;
+      size : cover;
+    };
+  }
+  .container-fluid
+  {
+    .row
+    {
+      .col-lg-2
+      {
+        &
+        {
+          border : 3px solid $border;
+        }
+      }
+      .col-lg-10
+      {
+        .row
+        {
+          .col-lg-4
+          {
+            .input-group
+            {
+              .icon
+              {
+                z-index: 6;
+                width: 50px;
+                height:100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+              }
+              input
+              {
+                border: 3px solid #00fff7;
+                box-shadow: 0px 1px 10px inset #00fff7;
+                background-color: #040404;
+              }
+            }
+            .Search
+            {
+              border: 3px solid #00ff88;
+              box-shadow: 0px 1px 15px inset #00ff88;
+              background-color: #040404;
+            }
+            .Cancel
+            {
+              border: 3px solid #ff0000;
+              box-shadow: 0px 1px 15px inset #ff0000;
+              background-color: #040404;
+            }
+          }
+          .col-lg-12
+          {
+            ::ng-deep .datatable-body-cell , ::ng-deep .datatable-header-cell , ::ng-deep .datatable-footer {
+              padding: 10px !important;
+              border: 2px solid $border-table;
+              background-color: $bg-input !important;
+              color : white !important;
+            }
+            ::ng-deep .ngx-datatable {
+              height: 550px;
+            }
+          }
+          .col-lg-12
+            {
+              .Add
+              {
+                border : 3px solid #ffe600;
+                box-shadow: 0px 1px 15px inset #ffe600;
+                background-color: #040404;
+              }
+            }
+        }
+      }
+    }
+  }
+}
+
+.glass-effect , .modal
+{
+  height : 100vh;
+  width: 100%;
+  /* From https://css.glass */
+  background: rgba(255, 255, 255, 0.2);
+  // border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.lds-ellipsis {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 40px;
+}
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #fff;
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
+}
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
+}
+@media only screen and (max-width: 1400px) and (min-width: 992px)
+{
+  main
+  {
+    .container-fluid
+    {
+      .row
+      {
+        .col-lg-2
+        {
+          &
+          {
+            width: 25%;
+          }
+        }
+        .col-lg-10
+        {
+          &
+          {
+            width: 75%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 992px)
+{
+  main
+  {
+    .container-fluid
+    {
+      .row
+      {
+        .col-lg-10
+        {
+          .col-lg-4
+          {
+            margin-top: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+}

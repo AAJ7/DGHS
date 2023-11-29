@@ -1,0 +1,768 @@
+<main id="content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-2 col-md-12 col-sm-12">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="col-lg-10 col-md-12 col-sm-12 p-0">
+        <app-navbar></app-navbar>
+        <div class="row p-sm m-0">
+          <div class="col-lg-4 in">
+            <div class="input-group position-relative">
+              <div class="icon position-absolute end-0">
+                <img src="../../../../assets/icons/loupe.png" alt="png img icon">
+              </div>
+              <input type="text" class="form-control rounded-3 text-white" aria-label="Default"
+                aria-describedby="inputGroup-sizing-default" placeholder="Search">
+            </div>
+          </div>
+          <div class="col-lg-4 d-flex justify-content-around align-items-center buttons">
+            <button type="button" class="btn Search rounded-4 text-white ms-sm">Search</button>
+            <button type="button" class="btn Cancel rounded-4 text-white ms-sm">Cancel Search</button>
+          </div>
+          <div class="col-lg-4 d-flex justify-content-around align-items-center buttons">
+            <select class="form-select text-white rounded-3 custom-select" aria-label="Default select example"
+              (change)="onChangeCompanies($event)">
+              <option disabled selected>Companies</option>
+              <option value="{{item.user.id}}" *ngFor="let item of companies">{{item.user.name}}</option>
+            </select>
+          </div>
+          <div class="row d-flex align-items-center mt-md">
+            <div class="col-lg-6 col-md-12 col-sm-12 text-lg-start text-center">
+              <button type="button" class="btn Add rounded-4 text-white ms-sm" (click)="openCreateForm()">Add New Order <img
+                  src="../../../../assets/icons/add.png" alt="add img png"></button>
+            </div>
+            <div class="col-lg-6 col-md-12 col-sm-12 d-flex align-items-center filter p-3">
+              <span class="f">Waiting Orders</span>
+              <div class="slash">|</div>
+              <span class="f">Received From Client</span>
+              <div class="slash">|</div>
+              <span class="f">In Progress</span>
+              <div class="slash">|</div>
+              <span class="f">Send To Client</span>
+              <div class="slash">|</div>
+              <span class="f">Done</span>
+            </div>
+          </div>
+          <div class="col-lg-12 mt-md p-sm">
+            <ngx-datatable [scrollbarH]="true" [scrollbarV]="true" class="material" [columnMode]="'force'"
+              [headerHeight]="50" [footerHeight]="50" [rowHeight]="70" rowHeight="auto" [rows]="rows" [limit]="3">
+              <ngx-datatable-column name="ID" prop="id" [width]="50"></ngx-datatable-column>
+              <ngx-datatable-column name="Drivers Manager ID" prop="drivers_manager_id"
+                [width]="150"></ngx-datatable-column>
+              <ngx-datatable-column name="Role" prop="role" [width]="100"></ngx-datatable-column>
+              <ngx-datatable-column name="Status" prop="status" [width]="120"></ngx-datatable-column>
+              <ngx-datatable-column name="Special Instructions" prop="special_instructions" [width]="200"></ngx-datatable-column>
+              <ngx-datatable-column name="Delivery Date" prop="delivery_date" [width]="100"></ngx-datatable-column>
+              <ngx-datatable-column name="Delivery Start Date" prop="actual_delivery_start_date_time"
+                [width]="200"></ngx-datatable-column>
+              <ngx-datatable-column name="Delivery End Date" prop="actual_delivery_end_date_time"
+                [width]="200"></ngx-datatable-column>
+              <ngx-datatable-column name="Pickup Date" prop="pickup_date" [width]="100"></ngx-datatable-column>
+              <ngx-datatable-column name="Pickup Start Date" prop="actual_pickup_start_date_time"
+                [width]="200"></ngx-datatable-column>
+              <ngx-datatable-column name="Pickup End Date" prop="actual_pickup_end_date_time"
+                [width]="200"></ngx-datatable-column>
+              <ngx-datatable-column name="Comment" prop="comment" [width]="100"></ngx-datatable-column>
+              <ngx-datatable-column name="Delivery Trasportation Period"
+                prop="delivery_trasportation_period_assigned_to_driver" [width]="200"></ngx-datatable-column>
+              <ngx-datatable-column name="Pickup Trasportation Period"
+                prop="pickup_trasportation_period_assigned_to_driver" [width]="200"></ngx-datatable-column>
+              <ngx-datatable-column name="Price" prop="price" [width]="80"></ngx-datatable-column>
+              <ngx-datatable-column name="Easy Order" prop="easy_order" [width]="100"></ngx-datatable-column>
+              <ngx-datatable-column name="Total Price" prop="total_price" [width]="100"></ngx-datatable-column>
+              <ngx-datatable-column name="Type" prop="type" [width]="100"></ngx-datatable-column>
+              <ngx-datatable-column name="Created At" prop="created_at" [width]="300">
+                <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                  <ng-container>
+                    {{row.created_at | date:'EEEE, MMMM d, y, h:mm:ss a'}}
+                  </ng-container>
+                </ng-template>
+              </ngx-datatable-column>
+              <ngx-datatable-column name="Actions" [sortable]="false" prop="id" [width]="200" [minWidth]="200"
+                [resizeable]="true">
+                <ng-template let-row="row" let-value="value" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                  <img src="../../../../assets/icons/inv.png" alt="img png" style="width: 40px; cursor: pointer;"
+                    class="me-sm" (click)="invoice(row)">
+                  <img src="../../../../assets/icons/editing.png" alt="img png" style="width: 40px; cursor: pointer;"
+                    class="me-sm" (click)="update(row)">
+                  <img src="../../../../assets/icons/trash.png" alt="img png" style="width: 40px; cursor: pointer;"
+                    class="me-sm">
+                </ng-template>
+              </ngx-datatable-column>
+            </ngx-datatable>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Create New Order -->
+<div class="modal fade show d-block" tabindex="-1" *ngIf="show_create" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content" style="background-color:#191919;">
+      <div class="d-flex justify-content-end align-items-center">
+        <i class="fa-solid fa-xmark fa-3x p-sm" (click)="close_create()" style="color: white; cursor: pointer;"></i>
+      </div>
+      <div class="modal-body">
+        <h2 class="fs-lg text-white text-center text-decoration mb-lg p-sm" style="background-color :#292929;">Add New Type Of Orders</h2>
+        <form class="text-white" [formGroup]="Create_Form" (ngSubmit)="CreateForm(Create_Form)">
+          <div class="row">
+            <div class="col-lg-6 text-lg-start text-center">
+              <label>Client :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example" 
+                (change)="pickupClient($event)" formControlName="client_id">
+                  <option selected disabled></option>
+                  <option *ngFor="let item of clients" value="{{item.id}}">{{item.name}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label>Client Location :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example"
+                (click)="pickupClientLocations($event)" formControlName="client_location_id">
+                  <option selected disabled></option>
+                  <option *ngFor="let item of clientLocations" value="{{item.id}}">{{item.data}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label>Delivery Type :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example"
+                (change)="pickupDeliveryTypes($event)">
+                  <option selected disabled></option>
+                  <option *ngFor="let item of deliveryTypes" value="{{item.id}}">{{item.name_en}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label>Company :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example"
+                (change)="onChangeCompanies($event)" formControlName="company_id">
+                  <option selected disabled></option>
+                  <option *ngFor="let item of companies" value="{{item.user.id}}">{{item.user.name}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label>Promo Code (optional) :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example">
+                  <option selected disabled></option>
+                  <option *ngFor="let item of promoCodes" value="{{item.id}}">{{item.code}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label>Type :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example"
+                (change)="getType($event)" formControlName="type">
+                  <option selected disabled></option>
+                  <option value="easy">Easy</option>
+                  <option value="product">Product</option>
+                </select>
+              </div>
+            </div>
+
+           <div class="bg-light rounded-3 p-3 mb-5" *ngIf="ProductType">
+            <h4 style="color: #04765b;" class="mb-5">Product Options :</h4>
+
+            <div class="row mb-md-3 mb-sm-5" *ngFor="let item of productOptions">
+              <div class="col-lg-3"><p class="text-dark fw-bold mt-3 text-lg-start text-center">{{item.name_en}}</p></div>
+              <div class="col-lg-6 mb-3">
+                <input type="number" id="content" class="form-control rounded-3" aria-label="Default"
+                aria-describedby="inputGroup-sizing-default" min="1" (mouseleave)="product(item.id , $event)">
+              </div>
+              <div class="col-lg-3"><button class="btn text-white rounded-3 w-100" type="button"
+                style="background-color: #04765b; border: 3px solid #01a2a3;">Done</button>
+              </div>
+            </div>
+           </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="content">Content :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <input type="text" id="content" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default" formControlName="content">
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="special_instruction">Special Instruction :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <input type="text" id="special_instruction" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default" formControlName="special_instructions">
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="comment">Comment :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <input type="text" id="comment" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default" formControlName="comment">
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="pickup_date">Pickup Date :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <input type="date" id="pickup_date" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default" (change)="pickupDate($any($event).target.value)">
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label>Pickup Period (optional) :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example">
+                  <option selected disabled></option>
+                  <option *ngFor="let item of pickupPeriods" value="{{item}}">{{item}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="pickup_driver">Pickup Driver (optional) :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example"
+                formControlName="pickup_driver_assigned_to_transportation_period_id">
+                  <option selected disabled></option>
+                  <option *ngFor="let item of pickupDrivers" value="{{item?.id}}">{{item?.name}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="pickup_date">Delivery Date :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <input type="date" id="pickup_date" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default" (change)="deliveryDate($any($event).target.value)">
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label>Delivery Period (optional) :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example">
+                  <option selected disabled></option>
+                  <option *ngFor="let item of deliveryPeriods" value="{{item}}">{{item}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="delivery_date">Delivery Driver (optional) :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example"
+                formControlName="delivery_driver_assigned_to_transportation_period_id">
+                  <option selected disabled></option>
+                  <option *ngFor="let item of deliveryDrivers" value="{{item?.id}}">{{item?.name}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="price">Price :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <input type="text" id="price" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="discount_value">Discount Value (optional) :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <input type="text" id="discount_value" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default" formControlName="discount_value">
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="discount_value_type">Discount Value Type (optional) : </label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <input type="text" id="discount_value_type" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default" formControlName="discount_value_type">
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="drivers_manager">Drivers Manager (optional) :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                  <select class="form-select rounded-3 custom-select" aria-label="Default select example"
+                  formControlName="drivers_manager_id">
+                    <option selected disabled></option>
+                    <option *ngFor="let item of driversManagers" value="{{item?.user?.id}}">{{item?.user?.name}}</option>
+                  </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center align-items-center mt-sm" *ngIf="!loader_create">
+            <button type="submit" class="btn rounded-3 w-50 text-white"
+              style="background-color: #2a2a2a; border: 2px solid #aaa5a5;"
+              >Add</button>
+          </div>
+        </form>
+        <div class="d-flex justify-content-center align-items-center" *ngIf="loader_create">
+          <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- [disabled]="!Create_Form.valid" -->
+
+
+
+<div class="modal fade show d-block" tabindex="-1" *ngIf="show_invoice" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content" style="background-color:#191919;">
+      <div class="d-flex justify-content-end align-items-center">
+        <i class="fa-solid fa-xmark fa-3x p-sm" (click)="close_invoice()" style="color: white; cursor: pointer;"></i>
+      </div>
+      <div class="modal-body">
+        <h2 class="fs-lg text-white text-center text-decoration mb-lg p-sm" style="background-color :#292929;">Invoice For Order #{{invoiceID}}</h2>
+        <div class="row">
+          <div class="col-lg-6">
+            <table class="table bg-light">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Qunatity</th>
+                  <th scope="col">Price</th>
+                  <th scope="col">Save Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>Mark</td>
+                  <td>Otto</td>
+                  <td>
+                  <button class="btn text-white rounded-3 w-100" type="button" style="background-color: #04765b; border: 3px solid #01a2a3;">Done</button>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">2</th>
+
+                  <td>Jacob</td>
+                  <td>Thornton</td>
+                  <td>
+                    <button class="btn text-white rounded-3 w-100" type="button" style="background-color: #04765b; border: 3px solid #01a2a3;">Done</button>
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">3</th>
+                  <td>Larry</td>
+                  <td>the Bird</td>
+                  <td>
+                     <button class="btn text-white rounded-3 w-100" type="button" style="background-color: #04765b; border: 3px solid #01a2a3;">Done</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-lg-6 text-white mt-3">
+            <div class="d-flex justify-content-between mb-3">
+              <p>Price :</p>
+              <p>5222 AED</p>
+            </div>
+
+            <div class="d-flex justify-content-between mb-3">
+              <p>Discount Value :</p>
+              <p>20%</p>
+            </div>
+
+            <div class="d-flex justify-content-between mb-3">
+              <p>Discount Value Type :</p>
+              <p>Percent</p>
+            </div>
+
+            <div class="d-flex justify-content-between mb-3">
+              <p>Tax Value :</p>
+              <p>0</p>
+            </div>
+
+            <div class="d-flex justify-content-between mb-3">
+              <p>Tax Value Type :</p>
+              <p>-</p>
+            </div>
+
+            <div class="d-flex justify-content-between mb-3">
+              <p>Delivery fees :</p>
+              <p>Free</p>
+            </div>
+
+            <div class="d-flex justify-content-between mb-3">
+              <p>Minimum Charge :</p>
+              <p>30</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Create New Order -->
+<div class="modal fade show d-block" tabindex="-1" *ngIf="show_create" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content" style="background-color:#191919;">
+      <div class="d-flex justify-content-end align-items-center">
+        <i class="fa-solid fa-xmark fa-3x p-sm" (click)="close_create()" style="color: white; cursor: pointer;"></i>
+      </div>
+      <div class="modal-body">
+        <h2 class="fs-lg text-white text-center text-decoration mb-lg p-sm" style="background-color :#292929;">Update Type Of Orders</h2>
+        <form class="text-white" [formGroup]="Update_Form" (ngSubmit)="UpdateForm(Update_Form)">
+          <div class="row">
+            <div class="col-lg-6 text-lg-start text-center">
+              <label>Client :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example" 
+                (change)="pickupClient($event)" formControlName="client_id">
+                  <option selected disabled></option>
+                  <option *ngFor="let item of clients" value="{{item.id}}">{{item.name}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label>Client Location :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example"
+                (click)="pickupClientLocations($event)" formControlName="client_location_id">
+                  <option selected disabled></option>
+                  <option *ngFor="let item of clientLocations" value="{{item.id}}">{{item.data}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label>Delivery Type :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example"
+                (change)="pickupDeliveryTypes($event)">
+                  <option selected disabled></option>
+                  <option *ngFor="let item of deliveryTypes" value="{{item.id}}">{{item.name_en}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label>Company :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example"
+                (change)="onChangeCompanies($event)" formControlName="company_id">
+                  <option selected disabled></option>
+                  <option *ngFor="let item of companies" value="{{item.user.id}}">{{item.user.name}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label>Promo Code (optional) :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example">
+                  <option selected disabled></option>
+                  <option *ngFor="let item of promoCodes" value="{{item.id}}">{{item.code}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label>Type :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example"
+                (change)="getType($event)" formControlName="type">
+                  <option selected disabled></option>
+                  <option value="easy">Easy</option>
+                  <option value="product">Product</option>
+                </select>
+              </div>
+            </div>
+
+           <div class="bg-light rounded-3 p-3 mb-5" *ngIf="ProductType">
+            <h4 style="color: #04765b;" class="mb-5">Product Options :</h4>
+
+            <div class="row mb-md-3 mb-sm-5" *ngFor="let item of productOptions">
+              <div class="col-lg-3"><p class="text-dark fw-bold mt-3 text-lg-start text-center">{{item.name_en}}</p></div>
+              <div class="col-lg-6 mb-3">
+                <input type="number" id="content" class="form-control rounded-3" aria-label="Default"
+                aria-describedby="inputGroup-sizing-default" min="1" (mouseleave)="product(item.id , $event)">
+              </div>
+              <div class="col-lg-3"><button class="btn text-white rounded-3 w-100" type="button"
+                style="background-color: #04765b; border: 3px solid #01a2a3;">Done</button>
+              </div>
+            </div>
+           </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="content">Content :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <input type="text" id="content" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default" formControlName="content">
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="special_instruction">Special Instruction :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <input type="text" id="special_instruction" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default" formControlName="special_instructions">
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="comment">Comment :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <input type="text" id="comment" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default" formControlName="comment">
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="pickup_date">Pickup Date :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <input type="date" id="pickup_date" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default" (change)="pickupDate($any($event).target.value)">
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label>Pickup Period (optional) :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example">
+                  <option selected disabled></option>
+                  <option *ngFor="let item of pickupPeriods" value="{{item}}">{{item}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="pickup_driver">Pickup Driver (optional) :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example"
+                formControlName="pickup_driver_assigned_to_transportation_period_id">
+                  <option selected disabled></option>
+                  <option *ngFor="let item of pickupDrivers" value="{{item?.id}}">{{item?.name}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="pickup_date">Delivery Date :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <input type="date" id="pickup_date" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default" (change)="deliveryDate($any($event).target.value)">
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label>Delivery Period (optional) :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example">
+                  <option selected disabled></option>
+                  <option *ngFor="let item of deliveryPeriods" value="{{item}}">{{item}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="delivery_date">Delivery Driver (optional) :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <select class="form-select rounded-3 custom-select" aria-label="Default select example"
+                formControlName="delivery_driver_assigned_to_transportation_period_id">
+                  <option selected disabled></option>
+                  <option *ngFor="let item of deliveryDrivers" value="{{item?.id}}">{{item?.name}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="price">Price :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <input type="text" id="price" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default">
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="discount_value">Discount Value (optional) :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <input type="text" id="discount_value" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default" formControlName="discount_value">
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="discount_value_type">Discount Value Type (optional) : </label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                <input type="text" id="discount_value_type" class="form-control rounded-3" aria-label="Default"
+                  aria-describedby="inputGroup-sizing-default" formControlName="discount_value_type">
+              </div>
+            </div>
+
+            <div class="col-lg-6 text-lg-start text-center">
+              <label for="drivers_manager">Drivers Manager (optional) :</label>
+            </div>
+            <div class="col-lg-6 mb-5">
+              <div class="input-group">
+                  <select class="form-select rounded-3 custom-select" aria-label="Default select example"
+                  formControlName="drivers_manager_id">
+                    <option selected disabled></option>
+                    <option *ngFor="let item of driversManagers" value="{{item?.user?.id}}">{{item?.user?.name}}</option>
+                  </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-center align-items-center mt-sm" *ngIf="!loader_create">
+            <button type="submit" class="btn rounded-3 w-50 text-white"
+              style="background-color: #2a2a2a; border: 2px solid #aaa5a5;"
+              >Add</button>
+          </div>
+        </form>
+        <div class="d-flex justify-content-center align-items-center" *ngIf="loader_create">
+          <div class="lds-ellipsis">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

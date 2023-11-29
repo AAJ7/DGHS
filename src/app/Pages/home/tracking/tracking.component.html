@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-2">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-lg-10 position-relative p-0">
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom] = 8>
+        <agm-marker  *ngFor="let coordinate of latlng; let i=index" [latitude]="coordinate.lat" [longitude]="coordinate.lng" [agmFitBounds]="true"
+        [iconUrl]="options"></agm-marker>
+        <agm-polyline [visible]="true" [strokeWeight]="3" [strokeColor]="'green'">
+          <agm-polyline-point *ngFor="let coordinate of latlng; let i=index" [latitude]="coordinate.lat" [longitude]="coordinate.lng"></agm-polyline-point>
+      </agm-polyline>
+      </agm-map>
+     <div class="p-sm top-0 end-0 position-absolute">
+      <select class="form-select rounded-3 p-sm w-100" aria-label="Default select example">
+        <option selected disabled>Select Type Of Tracking: <span>Orders</span></option>
+        <option value="all-users">Select Type Of Tracking: <span>Orders</span></option>
+        <option value="user">Select Type Of Tracking: <span>All Days</span></option>
+      </select>
+     </div>
+     <div class="info h-100 position-absolute top-0 start-0">
+      <div class="w-100 h-100 d-flex flex-column">
+        <div class="w-100 bg-light p-sm">
+          <div class="d-flex justify-content-between align-items-center w-100">
+            <span>Delivery Name: </span>
+            <span style="color: #008fa6;">Mostafa</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center w-100">
+            <span>Phone Number:</span>
+            <span style="color: #008fa6;">0151811555148</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center w-100">
+            <span>Company Name:</span>
+            <span style="color: #008fa6;">Raya</span>
+          </div>
+          <div class="d-flex justify-content-between align-items-center w-100">
+            <span>Company Phone Number: </span>
+            <span style="color: #008fa6;">51502</span>
+          </div>
+
+
+        </div>
+      </div>
+     </div>
+    </div>
+  </div>
+ </div>
+
+

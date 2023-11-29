@@ -1,0 +1,187 @@
+<div class="mb-lg text-center pt-lg">
+  <img src="../../../../assets/images/logo.png" alt="png img logo" class="logo">
+  <p class="text-white text-center">General House Service</p>
+</div>
+<div>
+  <div class="dropdown mb-sm">
+    <button class="btn text-white w-100 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+      <a routerLink="/home" class="text-white"> <img src="../../../../assets/icons/house.png" alt="png img">Home</a>
+      <img src="../../../../assets/icons/white.png" alt="white arrow png img icon">
+    </button>
+    <ul class="dropdown-menu w-100 text-white p-sm">
+      <li><a href="javascript:void(0)">Action</a></li>
+      <li><a href="javascript:void(0)">Another action</a></li>
+      <li><a href="javascript:void(0)">Something else here</a></li>
+    </ul>
+  </div>
+  <!-- <div class="dropdown  mb-sm">
+    <button class="btn text-white w-100 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+      <a href="javascript:void(0)" class="text-white"> <img src="../../../../assets/icons/management.png" alt="png img"> Project Manager</a>
+      <img src="../../../../assets/icons/white.png" alt="white arrow png img icon">
+    </button>
+    <ul class="dropdown-menu w-100 text-white p-sm">
+      <li><a routerLink="/project-manager/active/1"> <img src="../../../../assets/icons/checked.png" alt="img png checked"> Enabled</a></li>
+      <li><a routerLink="/project-manager/active/0"> <img src="../../../../assets/icons/error_1.png" alt="img png error"> Disabled</a></li>
+    </ul>
+  </div> -->
+  <!-- <div class="dropdown mb-sm">
+    <button class="btn text-white w-100 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+      <a href="javascript:void(0)" class="text-white"> <img src="../../../../assets/icons/cogwheel.png" alt="png img"> Country Manager</a>
+      <img src="../../../../assets/icons/white.png" alt="white arrow png img icon">
+    </button>
+    <ul class="dropdown-menu w-100 text-white p-sm">
+      <li *ngFor="let item of rows" class="d-flex align-items-start" [routerLink]="'/country_managers/country/' + item.id" style="cursor:pointer"><img [src]="'https://dev.generalhouseservices.com/' + item.img_path" alt="img png" class="mb-sm me-sm"> {{item.name_en}}</li>
+    </ul>
+  </div> -->
+  <div class="d-flex justify-content-start align-items-center mb-sm">
+    <img src="../../../../assets/icons/driver_manager.png" class="me-1" alt="png img"><a routerLink="/countries" class="text-white">Countries</a>
+  </div>
+  <!-- <div class="d-flex justify-content-start align-items-center mb-sm">
+    <img src="../../../../assets/icons/accounting.png" alt="png img"><a class="text-white">Accounts</a>
+  </div> -->
+  <div class="d-flex justify-content-start align-items-center mb-sm">
+    <img src="../../../../assets/icons/accounting.png" alt="png img"><a routerLink="/types-of-orders/delivery_types" class="text-white">Types of Orders</a>
+  </div>
+  <div class="dropdown mb-sm">
+    <button class="btn text-white w-100 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+      <a href="javascript:void(0)" class="text-white"> <img src="../../../../assets/icons/offers.png" alt="png img"> Offers</a>
+      <img src="../../../../assets/icons/white.png" alt="white arrow png img icon">
+    </button>
+    <ul class="dropdown-menu w-100 text-white p-sm">
+      <li><a routerLink="/offers/slider-offers"><img src="../../../../assets/icons/slider-offer.png" alt="img png">Slider Offers</a></li>
+      <li><a routerLink="/offers/promo-code"><img src="../../../../assets/icons/promo.png" alt="img png">Promo Code / Coupons</a></li>
+      <li><a routerLink="/offers/promo-code-offers"><img src="../../../../assets/icons/promo.png" alt="img png">Promo Code offers</a></li>
+      <li><a routerLink="/offers/global-offers"><img src="../../../../assets/icons/slider-offer.png" alt="img png">Global Offers</a></li>
+    </ul>
+  </div>
+  <div class="d-flex justify-content-start align-items-center mb-sm">
+    <img src="../../../../assets/icons/order_delivery.png" alt="png img"><a routerLink="/payment-methods" class="text-white">Corporate payment</a>
+  </div>
+  <div class="dropdown mb-sm">
+    <button class="btn text-white w-100 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+      <a href="javascript:void(0)" class="text-white"> <img src="../../../../assets/icons/employees.png" alt="png img"> User Management</a>
+      <img src="../../../../assets/icons/white.png" alt="white arrow png img icon">
+    </button>
+    <ul class="dropdown-menu w-100 text-white p-sm">
+      <li><a href="javascript:void(0)"> <img src="../../../../assets/icons/AddNewUser.png" alt="img png"> Add New User </a></li>
+      <li><a routerLink="/new_application_managers/admins" routerLinkActive="router-link-active" > <img src="../../../../assets/icons/Admins.png" alt="img png"> Admins</a></li>
+      <li><a routerLink="/new_application_managers/drivers"> <img src="../../../../assets/icons/Drivers.png" alt="img png"> Drivers</a></li>
+    </ul>
+  </div>
+  <div class="d-flex justify-content-start align-items-center mb-sm">
+    <img src="../../../../assets/icons/driver_manager.png" class="me-1" alt="png img"><a routerLink="/drivers-manager" class="text-white"> Drivers Manager</a>
+  </div>
+  <div class="dropdown mb-sm">
+    <button class="btn text-white w-100 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+      <a href="javascript:void(0)" class="text-white"> <img src="../../../../assets/icons/fast_delivery.png" alt="png img"> Delivery requests</a>
+      <img src="../../../../assets/icons/white.png" alt="white arrow png img icon">
+    </button>
+    <ul class="dropdown-menu w-100 text-white p-sm">
+      <li><a href="javascript:void(0)"> <img src="../../../../assets/icons/AllOrders.png" alt="img png"> All Orders</a></li>
+      <li><a href="javascript:void(0)"> <img src="../../../../assets/icons/WaitingOrders.png" alt="img png"> Waiting Orders</a></li>
+      <li><a href="javascript:void(0)"> <img src="../../../../assets/icons/ReceivedFromClient.png" alt="img png"> Received From Client</a></li>
+      <li><a href="javascript:void(0)"> <img src="../../../../assets/icons/InProgress.png" alt="img png"> In Progress</a></li>
+      <li><a href="javascript:void(0)"> <img src="../../../../assets/icons/Send.png" alt="img png"> Send</a></li>
+      <li><a href="javascript:void(0)"> <img src="../../../../assets/icons/Completed.png" alt="img png"> Completed</a></li>
+    </ul>
+  </div>
+  <div class="dropdown mb-sm">
+    <button class="btn text-white w-100 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+      <a href="javascript:void(0)" class="text-white"> <img src="../../../../assets/icons/settings.png" alt="png img"> Settings For Client </a>
+      <img src="../../../../assets/icons/white.png" alt="white arrow png img icon">
+    </button>
+    <ul class="dropdown-menu w-100 text-white p-sm">
+      <li><a routerLink="/order-steps"><img src="../../../../assets/icons/Steps To Order.png" alt="png img"> Steps To Order</a></li>
+      <li><a routerLink="/CooperationWithUsReason"><img src="../../../../assets/icons/Cooperated Clients.png" alt="png img"> Cooperated Clients</a></li>
+      <li><a href="javascript:void(0)"><img src="../../../../assets/icons/Clients Feedback.png" alt="png img"> Clients Feedback</a></li>
+      <li><a routerLink="/statistics-tags"><img src="../../../../assets/icons/Home Statistics.png" alt="png img"> Home Statistics</a></li>
+      <li><a href="javascript:void(0)"><img src="../../../../assets/icons/Social Accounts.png" alt="png img"> Social Accounts</a></li>
+      <li><a href="javascript:void(0)"><img src="../../../../assets/icons/about.png" alt="png img"> About Us </a></li>
+      <li><a href="javascript:void(0)"><img src="../../../../assets/icons/Terms And Conditions.png" alt="png img"> Terms And Conditions </a></li>
+      <li><a routerLink="/frequently_asked_question"><img src="../../../../assets/icons/Frequently Questions.png" alt="png img"> Frequently Questions </a></li>
+      <li><a href="javascript:void(0)"><img src="../../../../assets/icons/homepage.png" alt="png img"> Web Home Page </a></li>
+       <li><a routerLink="/footer"><img src="../../../../assets/icons/footer.png" alt="png img"> Footer </a></li>
+    </ul>
+  </div>
+   <div class="dropdown mb-sm">
+    <button class="btn text-white w-100 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+      <a href="javascript:void(0)" class="text-white"> <img src="../../../../assets/icons/page-content.png" alt="png img">Page content </a>
+      <img src="../../../../assets/icons/white.png" alt="white arrow png img icon">
+    </button>
+    <ul class="dropdown-menu w-100 text-white p-sm">
+      <li><a routerLink="/page-content/home-page"><img src="../../../../assets/icons/Steps To Order.png" alt="png img">Home Page</a></li>
+      <li><a routerLink="/page-content/navbar-and-footer-content"><img src="../../../../assets/icons/navbar.png" alt="png img"> Navbar And Footer Content </a></li>
+      <li><a routerLink="/page-content/home-slider-image"><img src="../../../../assets/icons/home-slider.png" alt="png img">Home Slider Image</a></li>
+      <li><a routerLink="/page-content/about-us"><img src="../../../../assets/icons/about-us.png" alt="png img">About Us</a></li>
+      <li><a routerLink="/page-content/offers-page"><img src="../../../../assets/icons/offer-page.png" alt="png img">Offers Page</a></li>
+      <li><a routerLink="/page-content/terms-and-conditions"><img src="" alt="png img">Terms and conditions</a></li>
+
+    </ul>
+  </div>
+  <div class="dropdown mb-sm">
+    <button class="btn text-white w-100 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+      <a href="javascript:void(0)" class="text-white"> <img src="../../../../assets/icons/report.png" alt="png img"> Reports</a>
+      <img src="../../../../assets/icons/white.png" alt="white arrow png img icon">
+    </button>
+    <ul class="dropdown-menu w-100 text-white p-sm">
+      <li><a href="javascript:void(0)"> <img src="../../../../assets/icons/Statistics.png" alt="png img"> Statistics</a></li>
+      <li><a href="javascript:void(0)"> <img src="../../../../assets/icons/OrderReports.png" alt="png img"> Order Reports</a></li>
+    </ul>
+  </div>
+  <div class="dropdown mb-sm">
+    <button class="btn text-white w-100 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+      <a href="javascript:void(0)" class="text-white"> <img src="../../../../assets/icons/categories-and-products.png" alt="png img"> Categories And Products</a>
+      <img src="../../../../assets/icons/white.png" alt="white arrow png img icon">
+    </button>
+    <ul class="dropdown-menu w-100 text-white p-sm">
+      <li><a routerLink="/categories"> <img src="../../../../assets/icons/cat.png" alt="png img"> Categories</a></li>
+    </ul>
+  </div>
+  <div class="dropdown mb-sm">
+    <button class="btn text-white w-100 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+      <a href="javascript:void(0)" class="text-white"> <img src="../../../../assets/icons/com.png" alt="png img"> Company</a>
+      <img src="../../../../assets/icons/white.png" alt="white arrow png img icon">
+    </button>
+    <ul class="dropdown-menu w-100 text-white p-sm">
+      <li><a  routerLink="/company"> <img src="../../../../assets/icons/com.png" alt="png img"> Company</a></li>
+      <li><a routerLink="/company/cooperate-with-companies"> <img src="../../../../assets/icons/dmc.png" alt="png img"> Driver Manager Cooperate With Company</a></li>
+    </ul>
+  </div>
+  <div class="d-flex justify-content-start align-items-center mb-sm">
+    <img src="../../../../assets/icons/Services.png" alt="png img"><a routerLink="/categories" class="text-white">Services</a>
+  </div>
+  <div class="dropdown mb-sm">
+    <button class="btn text-white w-100 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+      <a href="javascript:void(0)" class="text-white"> <img src="../../../../assets/icons/order-rates.png" alt="png img"> Order Rates</a>
+      <img src="../../../../assets/icons/white.png" alt="white arrow png img icon">
+    </button>
+    <ul class="dropdown-menu w-100 text-white p-sm">
+      <li><a routerLink="/order-rates/base-order-rates"> <img src="../../../../assets/icons/base-order-rates.png" alt="png img"> Base Order Dates</a></li>
+    </ul>
+  </div>
+  <div class="dropdown mb-sm">
+    <button class="btn text-white w-100 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+      <a href="javascript:void(0)" class="text-white"> <img src="../../../../assets/icons/user-manager.png" alt="png img"> User Manager </a>
+      <img src="../../../../assets/icons/white.png" alt="white arrow png img icon">
+    </button>
+    <ul class="dropdown-menu w-100 text-white p-sm">
+      <li><a> <img src="../../../../assets/icons/admin.png" alt="png img"> Admin</a></li>
+      <li><a> <img src="../../../../assets/icons/com.png" alt="png img"> Company</a></li>
+      <li><a> <img src="../../../../assets/icons/dmcwc.png" alt="png img"> Driver Manager Cooperate With Company</a></li>
+      <li><a> <img src="../../../../assets/icons/dm.png" alt="png img"> Drive Manager</a></li>
+      <li><a routerLink="/user-manager/clients"> <img src="../../../../assets/icons/client.png" alt="png img"> Clients</a></li>
+    </ul>
+  </div>
+  <div class="dropdown mb-sm">
+    <button class="btn text-white w-100 p-0 d-flex justify-content-between align-items-center" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border: none;">
+      <a href="javascript:void(0)" class="text-white"> <img src="../../../../assets/icons/order-managment.png" alt="png img"> Order Managment</a>
+      <img src="../../../../assets/icons/white.png" alt="white arrow png img icon">
+    </button>
+    <ul class="dropdown-menu w-100 text-white p-sm">
+      <li><a routerLink="/order-management/transportation-period"> <img src="../../../../assets/icons/TP.png" alt="png img"> Transportation Period</a></li>
+      <li><a routerLink="/order-management/delivey-type"> <img src="../../../../assets/icons/DT.png" alt="png img"> Delivery Type</a></li>
+      <li><a routerLink="/order-management/order"> <img src="../../../../assets/icons/order.png" alt="png img"> Order</a></li>
+      <li><a routerLink="/order-management/invoice"> <img src="../../../../assets/icons/invoice.png" alt="png img"> Invoice</a></li>
+    </ul>
+  </div>
+</div>

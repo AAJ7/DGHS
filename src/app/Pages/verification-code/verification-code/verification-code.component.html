@@ -1,0 +1,21 @@
+<main>
+<div class="container d-flex flex-column justify-content-center align-items-center">
+  <div class="col-lg-6 col-md-6 col-sm-6  d-flex flex-column justify-content-center align-items-center position-relative">
+
+    <img src="../../../../assets/images/logo.png" alt="img logo png">
+    <h1 class="text-center text-white mb-sm">Verification Code</h1>
+    <p class="text-white">We have sent a verification code to:</p>
+    <p class="fw-bold text-white">Test@test.com</p>
+    <p class="text-white">Please enter 5-digits you received below</p>
+
+
+    <ngx-otp-input [config]="otpInputConfig" (otpChange)="handeOtpChange($event)" (fill)="handleFillEvent($event)" #ngxotp></ngx-otp-input>
+
+    <button type="button" class="btn mt-sm text-white" (click)="GoToResetPassword()">Submit</button>
+
+    <div class="w-100 text-start mt-sm"><a class="text-white" href="javascript:void(0)">Send to the wrong email? </a> <a routerLink="/auth/forget-password" class="go_back">GO BACK</a></div>
+
+    <img src="../../../../assets/images/straight_right_arrow.png" alt="img png" class="position-absolute top-0 start-0" style="width: 70px; cursor: pointer;" (click)="GoToForgetPassword()">
+  </div>
+</div>
+</main>

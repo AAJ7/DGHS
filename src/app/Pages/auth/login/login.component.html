@@ -1,0 +1,35 @@
+<main id="content">
+
+  <div class="container d-flex flex-column justify-content-center align-items-center">
+
+    <div class="col-lg-12 col-md-12 col-sm-12  d-flex flex-column justify-content-center align-items-center">
+      <img src="../../../../assets/images/logo.png" alt="img logo png" id="logo">
+    <h1 class="text-center text-white mb-sm">Login</h1>
+
+   <form [formGroup]="LoginForm" (ngSubmit)="login(LoginForm)" class="w-100 d-flex flex-column justify-content-center align-items-center">
+    <div class="input-group mb-sm position-relative">
+      <div class="icon icon-right position-absolute start-0">
+        <img src="../../../../assets/icons/user.png" alt="img icon png user" class="w-50">
+      </div>
+      <input type="email" class="form-control rounded-3 text-white" placeholder="User Name" formControlName="email">
+    </div>
+
+    <div class="input-group mb-sm position-relative">
+      <div class="icon icon-right position-absolute start-0">
+        <img src="../../../../assets/icons/forgot-password.png" alt="img icon png lock forget-password" class="w-50">
+      </div>
+      <div class="icon icon-right position-absolute end-0">
+        <img src="../../../../assets/icons/hidden.png" alt="img icon png hidden unseen unvisible" class="w-50" (click)="seen()" style="cursor: pointer;" *ngIf="!eye">
+        <img src="../../../../assets/icons/icons8-eye-24.png"  alt="img icon png hidden unseen unvisible" class="w-50" (click)="seen()" style="cursor: pointer;" *ngIf="eye">
+      </div>
+      <input type="password" class="form-control rounded-3 text-white" aria-label="Default" aria-describedby="inputGroup-sizing-default" placeholder="Password" #input formControlName="password">
+    </div>
+
+    <div id="link"><a routerLink="/auth/forget-password" class="text-white">Forget Password ?</a></div>
+
+    <button type="submit" class="btn mt-sm">Login</button>
+   </form>
+    </div>
+
+  </div>
+</main>

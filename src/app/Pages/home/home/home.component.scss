@@ -1,0 +1,174 @@
+$bg-input : #040404;
+$shadow-input : #01a2a3;
+$border-input : #01a2a3;
+$border : #09fbc1;
+$border-table : #04765b;
+
+
+
+::ng-deep .ngx-charts {
+  text{
+      fill: #fff!important;
+  }
+}
+
+main
+{
+  &
+  {
+    min-height: 100vh;
+    background :
+    {
+      image : url("../../../../assets/images/bg-home.png");
+      position: center center;
+      size : cover;
+    };
+  }
+  .container-fluid
+  {
+    .row
+    {
+      .col-lg-2
+      {
+        &
+        {
+          border : 3px solid $border;
+        }
+      }
+      .col-lg-10
+      {
+        &
+        {
+          border : 3px solid $border;
+        }
+        .row
+        {
+          .first-quad
+          {
+            border :
+            {
+              right : 3px solid $border;
+              bottom : 3px solid $border;
+            }
+          }
+          .second-quad
+          {
+            border :
+            {
+              left : 3px solid $border;
+              bottom : 3px solid $border;
+            }
+          }
+          .third-quad
+          {
+            border :
+            {
+              right : 3px solid $border;
+              bottom : 3px solid $border;
+            }
+          }
+          .forth-quad
+          {
+            border :
+            {
+              left : 3px solid $border;
+              bottom : 3px solid $border;
+            }
+          }
+        }
+        h2
+        {
+          text-decoration: underline;
+          text-decoration-color: $border;
+        }
+        input
+        {
+          border : 2px solid $border-input;
+          background-color: $bg-input;
+          padding-left: 3rem;
+          z-index: 1;
+          box-shadow: 0px 5px 5px $border-input inset;
+        }
+        ::-webkit-input-placeholder
+        {
+          text-align: center;
+        }
+        :-moz-placeholder
+        {
+          text-align: center;
+        }
+        .row
+        {
+          .col-lg-6
+          {
+            .icon
+            {
+              z-index: 2;
+              width: 45px;
+              height:100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 992px)
+{
+  main
+{
+  .container-fluid
+  {
+    .row
+    {
+      .col-lg-10
+      {
+        .row
+        {
+          .col-lg-6
+          {
+            .row
+            {
+              .area-chart , .pie-chart
+              {
+                padding-bottom: 3rem;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+}
+
+@media only screen and (max-width: 1400px) and (min-width: 992px)
+{
+  main
+  {
+    .container-fluid
+    {
+      .row
+      {
+        .col-lg-2
+        {
+          &
+          {
+            width: 25%;
+          }
+        }
+        .col-lg-10
+        {
+          &
+          {
+            width: 75%;
+          }
+        }
+      }
+    }
+  }
+}

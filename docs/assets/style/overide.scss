@@ -1,0 +1,178 @@
+body {
+  @include font-size(16px);
+}
+
+.btn-primary {
+  color: $white;
+  &:hover,
+  &:focus {
+    color: $white;
+  }
+}
+
+.btn-danger {
+  color: $white;
+  &:hover,
+  &:focus {
+    color: $white;
+  }
+}
+
+.btn-white {
+  background: $white;
+  border-color: #d8ede8;
+  &:hover {
+    background: $primary;
+    border-color: $primary;
+    color: $white;
+  }
+  &.active {
+    border-color: $primary;
+    color: $primary;
+    &:hover {
+      color: $white;
+    }
+  }
+}
+
+.btn-light-primary {
+  background: rgba($primary, 0.1);
+  color: $primary;
+  &:hover {
+    color: $white;
+    background: $primary;
+  }
+}
+
+.btn-light-success {
+  background: #21C366;
+  color: $white;
+  &:hover, &:active {
+    color: $white;
+    background: rgba(#21C366, 0.9);
+  }
+}
+
+.btn-outline-primary {
+  &:hover {
+    color: $white;
+  }
+}
+
+.row {
+  @include media-breakpoint-down(md) {
+    margin-right: rem(-5px);
+    margin-left: rem(-5px);
+    > * {
+      padding-right: rem(5px);
+      padding-left: rem(5px);
+    }
+  }
+}
+
+.icons-input {
+  position: relative;
+  &-start {
+    position: absolute;
+    inset-inline-start: 0;
+    inset-block-start: 0;
+    inset-block-end: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: rem(48px);
+    color: $gray-600;
+    // background: $white;
+    margin: 1px;
+    border-radius: $input-border-radius;
+    padding: rem(14px) 0;
+    ~ .form-control,
+    ~ .form-select {
+      padding-inline-start: rem(48px);
+    }
+  }
+  &-end {
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-start: 0;
+    inset-block-end: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: rem(48px);
+    color: $gray-600;
+    // background: $white;
+    margin: 1px;
+    border-radius: $input-border-radius;
+    padding: rem(14px) 0;
+    ~ .form-control,
+    ~ .form-select {
+      padding-inline-start: rem(48px);
+    }
+  }
+}
+
+
+.swiper-slide {
+  height: auto;
+}
+.autoWidthSwiper {
+  .swiper-slide {
+    width: auto;
+  }
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  @include rfs(40px, width);
+  @include rfs(40px, height);
+  margin-top: 0;
+  transform: translateY(-50%);
+  border-radius: 20rem;
+  color: $primary;
+  background: $white;
+  box-shadow: 0px 4px 8px 0px rgb(0 0 0 / 20%);
+  display: none;
+  &:after {
+    @include font-size(18px);
+  }
+}
+
+.swiper {
+  &:hover {
+    .swiper-button-prev,
+    .swiper-button-next {
+      display: flex;
+    }
+  }
+}
+
+.swiper-button-prev.swiper-button-disabled,
+.swiper-button-next.swiper-button-disabled {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+.swiper-pagination-bullet {
+  background: $white;
+}
+
+
+.toast-container .ngx-toastr {
+  padding: 20px 20px 20px 50px !important;
+  min-width: 300px !important;
+  width: auto !important;
+}
+
+.ngx-datatable .datatable-header {
+  background: #232323;
+  color: #ffffff;
+}
+
+.ngx-datatable .datatable-footer {
+  background: #232323;
+}
+
+.ngx-datatable .datatable-body {
+  background: #ffffff;
+  color: #000000;
+}

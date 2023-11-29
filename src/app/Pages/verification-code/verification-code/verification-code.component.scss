@@ -1,0 +1,111 @@
+$shadow : #09fbc1;
+$bg-input : #040404;
+$icon-color : #a4a4a4;
+
+
+main
+{
+  &
+  {
+    min-height: 100vh;
+    height: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h1
+    {
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    background:
+    {
+      image : url("../../../../assets/images/bg.png");
+      position: center center;
+      size : cover;
+    };
+  }
+
+  .container
+  {
+    div[class^="col-"]
+    {
+      img
+      {
+        width: 50%;
+      }
+
+      // .input-field input::-webkit-inner-spin-button ,
+      // .input-field input::-webkit-outer-spin-button
+      // {
+      //     display: none;
+      // }
+
+      ::ng-deep ngx-otp-input
+      {
+        width: 100%;
+
+        // ::ng-deep .ngx-otp-input-box{}
+        ::ng-deep .ngx-otp-input-container
+        {
+          width: 100%;
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+        }
+
+        ::ng-deep .ngx-otp-input
+        {
+          background-color: $bg-input;
+          border: 1px solid $shadow;
+          box-shadow: 15px 15px 15px -20px $shadow inset, 0px 25px 20px -20px $shadow;
+          color: white;
+          caret-color: $shadow;
+          width: 3.3rem;
+          height: 3.3rem;
+          border-radius: 10px;
+        }
+      }
+      button
+      {
+        background:
+        {
+          color: $bg-input;
+        };
+        border: 1px solid $shadow;
+        box-shadow: $shadow 1px 1px 10px 0px inset;
+        width: 25%;
+      }
+      .go_back
+      {
+        color: $shadow;
+        text-decoration: underline;
+        text-decoration-color: $shadow;
+      }
+    }
+  }
+}
+
+
+@media only screen and (max-width : 992px)
+{
+  main
+  {
+    .container
+    {
+      div[class^="col-"]
+      {
+        img
+        {
+          width: 75%;
+        }
+        button
+        {
+          width: 50%;
+        }
+      }
+    }
+  }
+}
+
